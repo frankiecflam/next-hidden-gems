@@ -1,0 +1,33 @@
+.layout {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns:
+    [padding-left-start] 2rem [padding-left-end content-start] repeat(12, 1fr)
+    [content-end padding-right-start] 2rem [padding-right-end];
+}
+
+@media only screen and (min-width: 36em) {
+  .layout {
+    width: 54rem;
+  }
+}
+
+@media only screen and (min-width: 48em) {
+  .layout {
+    width: 72rem;
+  }
+}
+
+@media only screen and (min-width: 62em) {
+  .layout {
+    width: 96rem;
+  }
+}
+
+@media only screen and (min-width: 75em) {
+  .layout {
+    width: 114rem;
+  }
+}

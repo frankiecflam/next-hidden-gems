@@ -1,0 +1,24 @@
+.searchBar {
+  background-color: #e1e1e1;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 6rem;
+  color: #757575;
+  font-size: 1.8rem;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  color: currentColor;
+}
