@@ -1,4 +1,7 @@
 .header {
-  grid-column: padding-left-start / padding-right-end;
+  width: 100%;
   padding: 2rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
 }

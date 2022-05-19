@@ -1,14 +1,15 @@
+import styles from "./Layout.module.css";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import styles from "./Layout.module.css";
+import Container from "../UI/Container";
 
 const Layout = () => {
   return (
-    <div className={styles.layout}>
+    <Container className={styles.layout}>
       <Header />
 
       <Footer />
-    </div>
+    </Container>
   );
 };
 
