@@ -1,7 +1,12 @@
-import React from "react";
+import styles from "./index.module.css";
+import CollectionHeader from "../../components/Collection/CollectionHeader";
 
 const Collection = () => {
-  return <div>Collection</div>;
+  return (
+    <section className={styles.collection}>
+      <CollectionHeader />
+    </section>
+  );
 };
 
 export default Collection;
