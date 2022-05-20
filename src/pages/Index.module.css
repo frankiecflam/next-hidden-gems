@@ -1,12 +1,4 @@
 .home {
   width: 100%;
-  min-height: 100vh;
-  margin-top: 12rem;
-
-}
-
-@media only screen and (min-width: 62em) {
-  .home {
-    margin-top: 0;
-  }
+  height: calc(100vh - 12rem);
 }

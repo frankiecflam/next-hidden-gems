@@ -8,12 +8,10 @@ import {
   UserIcon,
 } from "../../assets/icons";
 import NavItem from "./NavItem";
-import NavSearchBar from "./NavSearchBar";
 
 const NavList = () => {
   return (
     <ul className={styles.navList}>
-      <NavSearchBar />
       <NavItem href="/">
         <HomeIcon />
       </NavItem>
@@ -30,7 +28,8 @@ const NavList = () => {
         <AddIcon />
       </NavItem>
 
-      <NavItem href="/gemmer">
+      {/* Hard Code for the moment */}
+      <NavItem href="/gemmer/12">
         <UserIcon />
       </NavItem>
     </ul>

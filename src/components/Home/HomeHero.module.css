@@ -1,10 +1,13 @@
 .hero {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
-  align-items: center;
+  align-items: flex-start;
+  height: 100%;
+  row-gap: 5rem;
 }
 
 .textContent {
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,6 +18,7 @@
   .textContent {
     align-items: flex-start;
     text-align: start;
+    margin-top: 12rem;
   }
 }
 

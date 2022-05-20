@@ -1,14 +1,14 @@
 import styles from "./Layout.module.css";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import Pages from "../Pages/Pages";
+import Main from "../Main/Main";
 import Container from "../UI/Container";
 
-const Layout = () => {
+const Layout = ({ children }) => {
   return (
     <Container className={styles.layout}>
       <Header />
-      <Pages />
+      <Main>{children}</Main>
       <Footer />
     </Container>
   );

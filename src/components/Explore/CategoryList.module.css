@@ -1,0 +1,10 @@
+.list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  column-gap: 5rem;
+  font-size: 2rem;
+  color: #454545;
+  flex-wrap: wrap;
+  row-gap: 3rem;
+}

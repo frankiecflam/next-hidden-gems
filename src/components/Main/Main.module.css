@@ -1,3 +1,4 @@
-.pages {
+.main {
   grid-column: content-start / content-end;
+  padding-top: 12rem;
 }

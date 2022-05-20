@@ -1,0 +1,26 @@
+.gemmerPicture {
+  justify-self: center;
+  border-radius: 100%;
+}
+
+.gemmerInfo {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.flex {
+  display: flex;
+  column-gap: 3rem;
+  align-items: center;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+
+.gemsNum,
+.followersNum {
+  font-weight: 600;
+}

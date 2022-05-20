@@ -1,0 +1,58 @@
+.form {
+  grid-template-columns: 1 / -1;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+
+.pictureFormControl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2rem;
+}
+
+.profilePicture {
+  border-radius: 100%;
+  width: 15rem;
+  height: 15rem;
+}
+
+.inputPicture {
+  color: #fff;
+}
+
+.inputPicture::file-selector-button {
+  visibility: hidden;
+}
+
+.inputPicture::before {
+  content: "Click here to upload";
+  display: block;
+  text-align: center;
+  background-color: #ededed;
+  color: #454545;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+}
+
+.textFormControl {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.textInput {
+  padding: 1rem 2rem;
+  border: none;
+  border-bottom: 2px solid #a2a2a2;
+}
+
+.textInput::placeholder {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.btn {
+  align-self: center;
+}

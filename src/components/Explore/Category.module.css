@@ -1,0 +1,14 @@
+.category {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 2rem;
+}
+
+.heading {
+    color: #646464;
+    font-weight: 500;
+    font-size: 1.6rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid currentColor;
+  }
