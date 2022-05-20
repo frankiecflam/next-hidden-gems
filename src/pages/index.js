@@ -1,9 +1,12 @@
+import styles from "./Index.module.css";
+import HomeHero from "../components/Home/HomeHero";
 
-
-export default function Home() {
+const Home = () => {
   return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
+    <section className={styles.home}>
+      <HomeHero />
+    </section>
   );
-}
+};
+
+export default Home;
