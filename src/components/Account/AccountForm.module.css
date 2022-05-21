@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+  width: 80%;
+  margin: 10rem auto 5rem auto;
+  color: #646464;
+}
+
+@media only screen and (max-width: 36em) {
+  .form {
+    width: 95%;
+  }
+}

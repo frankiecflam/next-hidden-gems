@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  color: #646464;
+}
+
+.heading {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 3.1rem;
+}
+
+.close {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  transition: all 0.4s;
+}
+
+.close:hover {
+  animation: pump 0.8s infinite;
+}
+
+@keyframes pump {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+.textContent {
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.textContent::first-letter {
+  text-transform: uppercase;
+}

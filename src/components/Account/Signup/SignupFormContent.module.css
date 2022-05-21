@@ -1,0 +1,11 @@
+.input {
+  padding: 1rem;
+  color: inherit;
+  border: none;
+  border-bottom: 2px solid currentColor;
+}
+
+.signupBtn {
+  margin-top: 5rem;
+  align-self: center;
+}
