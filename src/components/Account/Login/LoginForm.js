@@ -1,7 +1,8 @@
 import styles from "./LoginForm.module.css";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../../../store/Slices/AuthSlice";
+import { useRouter } from "next/router";
 
 import AccountForm from "../AccountForm";
 import AccountFormInput from "../AccountFormInput";
@@ -27,9 +28,7 @@ const LoginForm = ({ onUnsuccessfulLogin, onSuccessfulLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-
-  const token = useSelector((state) => state.auth.token);
-  console.log(token);
+  const router = useRouter();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +53,7 @@ const LoginForm = ({ onUnsuccessfulLogin, onSuccessfulLogin }) => {
         token: idToken,
       })
     );
+    router.push("/");
   };
 
   const handleEmailChange = (e) => {

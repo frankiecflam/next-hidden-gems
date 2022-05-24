@@ -1,7 +1,11 @@
 import styles from "./NavButtons.module.css";
 import LoginBtn from "../Buttons/LoginBtn";
 import SignupBtn from "../Buttons/SignupBtn";
-import { useReducer } from "react";
+import LogoutBtn from "../Buttons/LogoutBtn";
+import { Fragment, useReducer } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/Slices/AuthSlice";
+import { useRouter } from "next/router";
 
 const ACTIONS = {
   login: "LOGIN",
@@ -48,6 +52,9 @@ const NavButtons = () => {
     accountBtnInitialState
   );
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const handleLoginBtnClick = () => {
     accountBtnDispatch({ type: ACTIONS.login });
   };
@@ -64,20 +71,29 @@ const NavButtons = () => {
     accountBtnDispatch({ type: ACTIONS.clear });
   };
 
+  const handleLogoutClick = () => {
+    dispatch(logout());
+    router.push("/");
+  };
+
   return (
     <div className={styles.navButtons}>
-      <LoginBtn
-        onClick={handleLoginBtnClick}
-        onModalClose={handleModalClose}
-        onToggleBtnClick={handleToggleBtnClick}
-        showLoginModal={accountBtnState.loginModalActive}
-      />
-      <SignupBtn
-        onClick={handleSignupBtnClick}
-        showSignupModal={accountBtnState.signupModalActive}
-        onToggleBtnClick={handleToggleBtnClick}
-        onModalClose={handleModalClose}
-      />
+      <Fragment>
+        <LoginBtn
+          onClick={handleLoginBtnClick}
+          onModalClose={handleModalClose}
+          onToggleBtnClick={handleToggleBtnClick}
+          showLoginModal={accountBtnState.loginModalActive}
+        />
+        <SignupBtn
+          onClick={handleSignupBtnClick}
+          showSignupModal={accountBtnState.signupModalActive}
+          onToggleBtnClick={handleToggleBtnClick}
+          onModalClose={handleModalClose}
+        />
+      </Fragment>
+
+      <LogoutBtn onClick={handleLogoutClick} />
     </div>
   );
 };
