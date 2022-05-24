@@ -15,11 +15,13 @@ const SignupBtn = ({
       <Button className={styles.btn} onClick={onClick}>
         sign up
       </Button>
-      <Account
-        signupModalActive={showSignupModal}
-        onModalClose={onModalClose}
-        onToggleBtnClick={onToggleBtnClick}
-      />
+      {showSignupModal && (
+        <Account
+          signupModalActive={showSignupModal}
+          onModalClose={onModalClose}
+          onToggleBtnClick={onToggleBtnClick}
+        />
+      )}
     </Fragment>
   );
 };

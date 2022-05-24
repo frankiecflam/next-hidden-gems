@@ -1,0 +1,16 @@
+.signupUnsuccess {
+  padding: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  text-align: center;
+  color: #646464;
+}
+
+.message {
+  font-size: 2.5rem;
+}
+
+.feedback {
+  font-size: 1.6rem;
+}

@@ -30,7 +30,7 @@ const accountBtnReducer = (state, action) => {
 
     case ACTIONS.toggle:
       return {
-        loginModalActive: !state.oginModalActive,
+        loginModalActive: !state.loginModalActive,
         signupModalActive: !state.signupModalActive,
       };
 

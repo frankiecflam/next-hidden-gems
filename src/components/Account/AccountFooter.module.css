@@ -6,3 +6,12 @@
   row-gap: 2rem;
   align-items: center;
 }
+
+.explore {
+  background-color: #1cca8a;
+  padding: 1rem 2rem;
+  color: #fff;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 2rem;
+}

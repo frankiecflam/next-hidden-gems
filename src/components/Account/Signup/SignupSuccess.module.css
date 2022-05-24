@@ -1,0 +1,11 @@
+.signupSuccess {
+  padding: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: #646464;
+}
+
+.message {
+  font-size: 2.5rem;
+}

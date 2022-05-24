@@ -15,11 +15,13 @@ const LoginBtn = ({
       <Button className={styles.btn} onClick={onClick}>
         Log in
       </Button>
-      <Account
-        loginModalActive={showLoginModal}
-        onModalClose={onModalClose}
-        onToggleBtnClick={onToggleBtnClick}
-      />
+      {showLoginModal && (
+        <Account
+          loginModalActive={showLoginModal}
+          onModalClose={onModalClose}
+          onToggleBtnClick={onToggleBtnClick}
+        />
+      )}
     </Fragment>
   );
 };

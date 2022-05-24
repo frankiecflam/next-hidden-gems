@@ -1,0 +1,53 @@
+.input {
+  width: 100%;
+  color: inherit;
+  border: none;
+  border-bottom: 2px solid currentColor;
+}
+
+.accountInput {
+  position: relative;
+}
+
+.correctIcon,
+.incorrectIcon {
+  opacity: 0;
+  position: absolute;
+  top: 15%;
+  right: 1%;
+  height: 2rem;
+  width: 2rem;
+  transition: all 0.3s;
+}
+
+.correctIcon {
+  fill: #1cca8a;
+}
+
+.incorrectIcon {
+  fill: #646464;
+}
+
+.invalidFeedback {
+  padding: 0.5rem 1rem;
+  color: #cb1c21;
+  font-size: 1.4rem;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.invalidFeedback::first-letter {
+  text-transform: uppercase;
+}
+
+.validated.correct .correctIcon {
+  opacity: 1;
+}
+
+.validated.incorrect .incorrectIcon {
+  opacity: 1;
+}
+
+.validated.incorrect .invalidFeedback {
+  opacity: 1;
+}
