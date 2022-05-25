@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps, authToken }) {
   return (
     <Provider store={Store}>
       <Layout authToken={authToken}>
-        <Component {...pageProps} authToken={authToken} />
+        <Component {...pageProps} />
       </Layout>
     </Provider>
   );
