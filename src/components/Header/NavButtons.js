@@ -46,7 +46,7 @@ const accountBtnReducer = (state, action) => {
   }
 };
 
-const NavButtons = () => {
+const NavButtons = ({ isAuthenticated }) => {
   const [accountBtnState, accountBtnDispatch] = useReducer(
     accountBtnReducer,
     accountBtnInitialState
@@ -78,22 +78,24 @@ const NavButtons = () => {
 
   return (
     <div className={styles.navButtons}>
-      <Fragment>
-        <LoginBtn
-          onClick={handleLoginBtnClick}
-          onModalClose={handleModalClose}
-          onToggleBtnClick={handleToggleBtnClick}
-          showLoginModal={accountBtnState.loginModalActive}
-        />
-        <SignupBtn
-          onClick={handleSignupBtnClick}
-          showSignupModal={accountBtnState.signupModalActive}
-          onToggleBtnClick={handleToggleBtnClick}
-          onModalClose={handleModalClose}
-        />
-      </Fragment>
+      {!isAuthenticated && (
+        <Fragment>
+          <LoginBtn
+            onClick={handleLoginBtnClick}
+            onModalClose={handleModalClose}
+            onToggleBtnClick={handleToggleBtnClick}
+            showLoginModal={accountBtnState.loginModalActive}
+          />
+          <SignupBtn
+            onClick={handleSignupBtnClick}
+            showSignupModal={accountBtnState.signupModalActive}
+            onToggleBtnClick={handleToggleBtnClick}
+            onModalClose={handleModalClose}
+          />
+        </Fragment>
+      )}
 
-      <LogoutBtn onClick={handleLogoutClick} />
+      {isAuthenticated && <LogoutBtn onClick={handleLogoutClick} />}
     </div>
   );
 };

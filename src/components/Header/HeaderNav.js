@@ -4,12 +4,12 @@ import NavBrand from "./NavBrand";
 import NavList from "./NavList";
 import NavButtons from "./NavButtons";
 
-const HeaderNav = () => {
+const HeaderNav = ({ isAuthenticated }) => {
   return (
     <nav className={styles.nav}>
       <NavBrand />
-      <NavList />
-      <NavButtons />
+      {isAuthenticated && <NavList />}
+      <NavButtons isAuthenticated={isAuthenticated} />
     </nav>
   );
 };

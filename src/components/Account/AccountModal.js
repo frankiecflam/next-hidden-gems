@@ -85,6 +85,7 @@ const AccountModal = ({
   };
 
   const handleSuccessfulLogin = () => {
+    onModalClose();
     accountFormStateDispatch({ type: ACTIONS.successfulLogin });
   };
 

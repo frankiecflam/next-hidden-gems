@@ -4,10 +4,23 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Container from "../UI/Container";
 
-const Layout = ({ children }) => {
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import getAuthTokenFromCookie from "../../utils/helpers/getAuthToken";
+
+const Layout = ({ children, authToken }) => {
+  const { token } = useSelector((state) => state.auth);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    authToken
+      ? setIsAuthenticated(authToken === token)
+      : setIsAuthenticated(getAuthTokenFromCookie() === token);
+  }, [authToken, token]);
+
   return (
     <Container className={styles.layout}>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       <Main>{children}</Main>
       {/* <Footer /> */}
     </Container>

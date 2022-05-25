@@ -2,12 +2,26 @@
   list-style: none;
 }
 
-@media only screen and (min-width: 62em) {
+@media only screen and (min-width: 48em) {
   .navList {
     flex-grow: 1;
     display: flex;
-    column-gap: 2rem;
+    column-gap: 4rem;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 47.99em) {
+  .navList {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
   }
 }
