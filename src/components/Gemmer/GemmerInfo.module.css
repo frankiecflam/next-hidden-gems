@@ -1,6 +1,9 @@
 .gemmerPicture {
   justify-self: center;
   border-radius: 100%;
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
 }
 
 .gemmerInfo {

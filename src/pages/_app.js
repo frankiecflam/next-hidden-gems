@@ -3,11 +3,12 @@ import Layout from "../components/Layout/Layout";
 import { Provider } from "react-redux";
 import Store from "../store/Store";
 import App from "next/app";
+import getCurrentUserId from "../utils/helpers/getCurrentUserId";
 
-function MyApp({ Component, pageProps, authToken }) {
+function MyApp({ Component, pageProps, currentUserId }) {
   return (
     <Provider store={Store}>
-      <Layout authToken={authToken}>
+      <Layout currentUserId={currentUserId}>
         <Component {...pageProps} />
       </Layout>
     </Provider>
@@ -21,6 +22,7 @@ MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
 
   const authToken = appContext.ctx.req?.cookies.authToken;
+  const currentUserId = await getCurrentUserId(authToken);
 
-  return { ...appProps, authToken };
+  return { ...appProps, currentUserId: currentUserId || null };
 };

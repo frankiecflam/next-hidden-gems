@@ -109,7 +109,7 @@ const SignupForm = ({ onSuccessfulSignup, onUnsuccessfulSignup }) => {
 
     if (!formValidity) return;
 
-    const { email, password } = inputState;
+    const { email, password, username } = inputState;
     const response = await sendDataToServer({
       email,
       password,
@@ -120,6 +120,28 @@ const SignupForm = ({ onSuccessfulSignup, onUnsuccessfulSignup }) => {
       onUnsuccessfulSignup();
       return;
     }
+
+    // Create userObject
+    const { localId: userID } = await response.json();
+    const user = {
+      id: userID,
+      username,
+      bio: "",
+      joinedOn: new Date(Date.now()),
+      profileImage: "",
+      gems: [],
+      collection: [],
+      following: [],
+      followers: [],
+    };
+
+    await fetch("/api/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
 
     onSuccessfulSignup();
   };

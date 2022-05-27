@@ -1,8 +1,7 @@
+import { getCookie } from "cookies-next";
+
 export default function getAuthTokenFromCookie(ctx) {
-  const cookie = ctx ? ctx.req.headers.cookie : document.cookie;
+  const authToken = getCookie("authToken", ctx);
 
-  const [name, value] = cookie ? cookie.split("=") : [null, null];
-  const authToken = name === "authToken" ? value : null;
-
-  return authToken;
+  return authToken || null;
 }

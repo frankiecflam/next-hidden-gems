@@ -4,19 +4,26 @@ import { Fragment } from "react";
 import FollowBtn from "../Buttons/FollowBtn";
 import EditBtn from "../Buttons/EditBtn";
 
-const GemmerInfo = ({ gemmer }) => {
-  const { image, username, gems, followers, bio } = gemmer;
+const GemmerInfo = ({ gemmer, isSameUser, onEditClick }) => {
+  const { profileImage, username, gems, followers, bio } = gemmer;
 
-  const gemsNum = gems.length;
-  const followersNum = followers.length;
+  const gemsNum = gems ? gems.length : 0;
+  const followersNum = followers ? followers.length : 0;
   return (
     <Fragment>
-      <img src={image} className={styles.gemmerPicture} />
+      <img
+        src={
+          profileImage
+            ? profileImage
+            : "https://randomuser.me/api/portraits/men/32.jpg"
+        }
+        className={styles.gemmerPicture}
+      />
       <div className={styles.gemmerInfo}>
         <div className={styles.flex}>
           <p className={styles.username}>{username}</p>
-          <FollowBtn />
-          <EditBtn />
+          {!isSameUser && <FollowBtn />}
+          {isSameUser && <EditBtn onClick={onEditClick} />}
         </div>
         <div className={styles.flex}>
           <p>

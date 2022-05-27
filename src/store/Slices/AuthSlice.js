@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setCookies, removeCookies } from "cookies-next";
 
 function getTokenFromCookie() {
   if (typeof window !== "undefined") {
@@ -17,15 +18,18 @@ const AuthSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      document.cookie = `authToken=${action.payload.token};`;
+      // Clear any existing token
+      removeCookies("authToken");
+
+      // Set a new token
+      setCookies("authToken", action.payload.token);
 
       return {
         token: action.payload.token,
       };
     },
     logout() {
-      document.cookie =
-        "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      removeCookies("authToken");
       return initialState;
     },
   },

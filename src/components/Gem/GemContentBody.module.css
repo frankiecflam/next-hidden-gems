@@ -1,0 +1,20 @@
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  color: #a2a2a2;
+  font-size: 1.4rem;
+}
+
+.title {
+  font-size: 3.1rem;
+}
+
+.description {
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: #646464;
+  line-height: 120%;
+}

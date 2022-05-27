@@ -1,5 +1,6 @@
 import styles from "./Masonry.module.css";
 import Masonry from "react-masonry-css";
+import MasonryItem from "./MasonryItem";
 
 const DUMMY_DATA = [
   {
@@ -180,27 +181,23 @@ const DUMMY_DATA = [
 ];
 
 const breakpointColumnsObj = {
-  default: 5,
-  992: 4,
-  768: 3,
+  default: 4,
+  992: 3,
+  768: 2,
   576: 2,
 };
 
 //...
 
-const Masonary = () => {
+const Masonary = ({ gems, users }) => {
   return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
       className={styles.masonaryGrid}
       columnClassName={styles.gridColumn}
     >
-      {DUMMY_DATA.map((item) => {
-        return (
-          <div key={item.id}>
-            <img src={item.image} />
-          </div>
-        );
+      {gems.map((item) => {
+        return <MasonryItem key={item.id} item={item} users={users} />;
       })}
     </Masonry>
   );

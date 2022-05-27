@@ -2,12 +2,31 @@ import styles from "./GemmerHeader.module.css";
 
 import GemmerInfo from "./GemmerInfo";
 import GemmerEditForm from "./GemmerEditForm";
+import { useState } from "react";
 
-const GemmerHeader = ({ gemmer }) => {
+const GemmerHeader = ({ gemmer, isSameUser }) => {
+  const [showEditForm, setShowEditForm] = useState(false);
+
+  const handleEditClick = () => {
+    setShowEditForm((prevState) => !prevState);
+  };
+
+  const handleEditFormSubmit = (newData) => {
+    
+  };
+
   return (
     <header className={styles.header}>
-      <GemmerInfo gemmer={gemmer} />
-      {/* <GemmerEditForm gemmer={gemmer}/> */}
+      {!showEditForm && (
+        <GemmerInfo
+          gemmer={gemmer}
+          isSameUser={isSameUser}
+          onEditClick={handleEditClick}
+        />
+      )}
+      {showEditForm && (
+        <GemmerEditForm gemmer={gemmer} onCloseEdit={handleEditClick} />
+      )}
     </header>
   );
 };

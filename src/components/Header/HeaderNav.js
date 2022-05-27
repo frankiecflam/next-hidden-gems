@@ -4,11 +4,13 @@ import NavBrand from "./NavBrand";
 import NavList from "./NavList";
 import NavButtons from "./NavButtons";
 
-const HeaderNav = ({ isAuthenticated }) => {
+const HeaderNav = ({ currentUserId }) => {
+  const isAuthenticated = currentUserId ? true : false;
+
   return (
     <nav className={styles.nav}>
       <NavBrand />
-      {isAuthenticated && <NavList />}
+      {isAuthenticated && <NavList currentUserId={currentUserId} />}
       <NavButtons isAuthenticated={isAuthenticated} />
     </nav>
   );

@@ -19,7 +19,6 @@ export default async function handler(req, res) {
     if (!response.ok) {
       res.status(400).json({ response });
     }
-
     const { idToken } = await response.json();
 
     res.status(200).json({ response, idToken });

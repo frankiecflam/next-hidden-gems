@@ -9,7 +9,7 @@ import {
 } from "../../assets/icons";
 import NavItem from "./NavItem";
 
-const NavList = () => {
+const NavList = ({ currentUserId }) => {
   return (
     <ul className={styles.navList}>
       <NavItem href="/">
@@ -29,7 +29,7 @@ const NavList = () => {
       </NavItem>
 
       {/* Hard Code for the moment */}
-      <NavItem href="/gemmer/12">
+      <NavItem href={`/gemmer/${currentUserId}`}>
         <UserIcon />
       </NavItem>
     </ul>

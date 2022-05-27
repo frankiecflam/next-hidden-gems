@@ -1,41 +1,50 @@
 import styles from "./GemmerEditForm.module.css";
-import { useState, useEffect } from "react";
+import useFileReader from "../../utils/hooks/useFileReader";
 
 import SubmitBtn from "../Buttons/SubmitBtn";
+import { useState } from "react";
+import updateGemmerProfile from "../../utils/helpers/updateGemmerProfile";
+import uploadImageToFirebase from "../../utils/helpers/uploadImageToFirebase";
+import { useRouter } from "next/router";
 
-const GemmerEditForm = ({ gemmer }) => {
-  const [file, setFile] = useState(null);
-  const [fileDataURL, setFileDataURL] = useState(gemmer.image);
+const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
+  const { id, username, bio, joinedOn, gemmerDbKey, profileImage } = gemmer;
+  const { file, fileDataURL, handleFileChange } = useFileReader(profileImage);
+  const [enteredUsername, setEnteredUsername] = useState(username);
+  const [enteredBio, setEnteredBio] = useState(bio);
+  const router = useRouter();
 
-  const { username, bio } = gemmer;
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const data = {
+      id,
+      joinedOn,
+      profileImage: file
+        ? await uploadImageToFirebase(file, "gemmers")
+        : profileImage,
+      username: enteredUsername,
+      bio: enteredBio,
+    };
+
+    await updateGemmerProfile(data, gemmerDbKey);
+
+    // To force a reload of the current page with newly-fetched data from DB
+    const { gemmerId } = router.query;
+    router.push(`/gemmer/${gemmerId}`);
+    onCloseEdit();
   };
 
-  useEffect(() => {
-    let fileReader,
-      isCancel = false;
-    if (file) {
-      fileReader = new FileReader();
-      fileReader.onload = (e) => {
-        const { result } = e.target;
-        if (result && !isCancel) {
-          setFileDataURL(result);
-        }
-      };
-      fileReader.readAsDataURL(file);
-    }
-    return () => {
-      isCancel = true;
-      if (fileReader && fileReader.readyState === 1) {
-        fileReader.abort();
-      }
-    };
-  }, [file]);
+  const handleUsernameChange = (e) => {
+    setEnteredUsername(e.target.value);
+  };
+
+  const handleBioChange = (e) => {
+    setEnteredBio(e.target.value);
+  };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleFormSubmit}>
       <div className={styles.pictureFormControl}>
         <img src={fileDataURL} className={styles.profilePicture} />
         <input
@@ -48,15 +57,18 @@ const GemmerEditForm = ({ gemmer }) => {
       <div className={styles.textFormControl}>
         <input
           type="text"
-          defaultValue={username}
           placeholder="username"
           className={styles.textInput}
+          onChange={handleUsernameChange}
+          value={enteredUsername}
+          required
         />
         <textarea
           cols="50"
           rows="10"
           placeholder="bio"
-          defaultValue={bio}
+          onChange={handleBioChange}
+          value={enteredBio}
           className={styles.textInput}
         />
         <SubmitBtn className={styles.btn} />

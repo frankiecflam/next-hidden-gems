@@ -3,11 +3,11 @@ import styles from "./Header.module.css";
 import HeaderNav from "./HeaderNav";
 import Container from "../UI/Container";
 
-const Header = ({ isAuthenticated }) => {
+const Header = ({ currentUserId }) => {
   return (
     <header className={styles.header}>
       <Container>
-        <HeaderNav isAuthenticated={isAuthenticated} />
+        <HeaderNav currentUserId={currentUserId} />
       </Container>
     </header>
   );
