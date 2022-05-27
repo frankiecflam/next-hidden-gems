@@ -1,3 +1,5 @@
+import cookie from "cookie";
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
@@ -21,6 +23,16 @@ export default async function handler(req, res) {
     }
     const { idToken } = await response.json();
 
-    res.status(200).json({ response, idToken });
+    // setCookie
+    res.setHeader(
+      "Set-Cookie",
+      cookie.serialize("authToken", idToken, {
+        httpOnly: true,
+        maxAge: 60 * 60,
+        sameSite: "strict",
+        path: "/",
+      })
+    );
+    res.status(200).json({ response });
   }
 }

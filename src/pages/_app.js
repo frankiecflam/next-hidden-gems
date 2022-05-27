@@ -1,17 +1,13 @@
 import "../../styles/globals.css";
 import Layout from "../components/Layout/Layout";
-import { Provider } from "react-redux";
-import Store from "../store/Store";
 import App from "next/app";
 import getCurrentUserId from "../utils/helpers/getCurrentUserId";
 
 function MyApp({ Component, pageProps, currentUserId }) {
   return (
-    <Provider store={Store}>
-      <Layout currentUserId={currentUserId}>
-        <Component {...pageProps} />
-      </Layout>
-    </Provider>
+    <Layout currentUserId={currentUserId}>
+      <Component {...pageProps} />
+    </Layout>
   );
 }
 

@@ -1,7 +1,5 @@
 import styles from "./LoginForm.module.css";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../../store/Slices/AuthSlice";
 import { useRouter } from "next/router";
 
 import AccountForm from "../AccountForm";
@@ -16,18 +14,15 @@ const sendDataToServer = async (data) => {
     },
     body: JSON.stringify(data),
   });
-  const { idToken } = await response.json();
 
   return {
     response,
-    idToken,
   };
 };
 
 const LoginForm = ({ onUnsuccessfulLogin, onSuccessfulLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleFormSubmit = async (e) => {
@@ -39,7 +34,7 @@ const LoginForm = ({ onUnsuccessfulLogin, onSuccessfulLogin }) => {
     });
 
     // Check if logged in successfully
-    const { response: serverResponse, idToken } = response;
+    const { response: serverResponse } = response;
 
     if (!serverResponse.ok) {
       onUnsuccessfulLogin();
@@ -48,11 +43,6 @@ const LoginForm = ({ onUnsuccessfulLogin, onSuccessfulLogin }) => {
 
     // If successful,
     onSuccessfulLogin();
-    dispatch(
-      login({
-        token: idToken,
-      })
-    );
     router.push("/");
   };
 

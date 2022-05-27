@@ -3,8 +3,6 @@ import LoginBtn from "../Buttons/LoginBtn";
 import SignupBtn from "../Buttons/SignupBtn";
 import LogoutBtn from "../Buttons/LogoutBtn";
 import { Fragment, useReducer } from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../../store/Slices/AuthSlice";
 import { useRouter } from "next/router";
 
 const ACTIONS = {
@@ -52,7 +50,6 @@ const NavButtons = ({ isAuthenticated }) => {
     accountBtnInitialState
   );
 
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleLoginBtnClick = () => {
@@ -71,8 +68,9 @@ const NavButtons = ({ isAuthenticated }) => {
     accountBtnDispatch({ type: ACTIONS.clear });
   };
 
-  const handleLogoutClick = () => {
-    dispatch(logout());
+  const handleLogoutClick = async () => {
+    await fetch("/api/logout");
+
     router.push("/");
   };
 
