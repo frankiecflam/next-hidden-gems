@@ -11,10 +11,6 @@ const GemmerHeader = ({ gemmer, isSameUser }) => {
     setShowEditForm((prevState) => !prevState);
   };
 
-  const handleEditFormSubmit = (newData) => {
-    
-  };
-
   return (
     <header className={styles.header}>
       {!showEditForm && (

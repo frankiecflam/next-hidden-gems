@@ -3,12 +3,13 @@ import useFileReader from "../../utils/hooks/useFileReader";
 
 import SubmitBtn from "../Buttons/SubmitBtn";
 import { useState } from "react";
-import updateGemmerProfile from "../../utils/helpers/updateGemmerProfile";
+import updateGemmerData from "../../utils/helpers/updateGemmerData";
 import uploadImageToFirebase from "../../utils/helpers/uploadImageToFirebase";
 import { useRouter } from "next/router";
+import popoutGemmerDbKey from "../../utils/helpers/popoutGemmerDbKey";
 
 const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
-  const { id, username, bio, joinedOn, gemmerDbKey, profileImage } = gemmer;
+  const { username, bio, gemmerDbKey, profileImage } = gemmer;
   const { file, fileDataURL, handleFileChange } = useFileReader(profileImage);
   const [enteredUsername, setEnteredUsername] = useState(username);
   const [enteredBio, setEnteredBio] = useState(bio);
@@ -17,9 +18,11 @@ const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    // Clone the existing object and pop out gemmerDbKey
+    const modifiedGemmer = popoutGemmerDbKey(gemmer);
+
     const data = {
-      id,
-      joinedOn,
+      ...modifiedGemmer,
       profileImage: file
         ? await uploadImageToFirebase(file, "gemmers")
         : profileImage,
@@ -27,7 +30,7 @@ const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
       bio: enteredBio,
     };
 
-    await updateGemmerProfile(data, gemmerDbKey);
+    await updateGemmerData(data, gemmerDbKey);
 
     // To force a reload of the current page with newly-fetched data from DB
     const { gemmerId } = router.query;

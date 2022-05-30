@@ -1,7 +1,7 @@
 import "../../styles/globals.css";
 import Layout from "../components/Layout/Layout";
 import App from "next/app";
-import getCurrentUserId from "../utils/helpers/getCurrentUserId";
+import getUserIdByToken from "../utils/helpers/getUserIdByToken";
 
 function MyApp({ Component, pageProps, currentUserId }) {
   return (
@@ -18,7 +18,7 @@ MyApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
 
   const authToken = appContext.ctx.req?.cookies.authToken;
-  const currentUserId = await getCurrentUserId(authToken);
+  const currentUserId = await getUserIdByToken(authToken);
 
   return { ...appProps, currentUserId: currentUserId || null };
 };

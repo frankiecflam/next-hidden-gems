@@ -2,7 +2,7 @@ import styles from "./index.module.css";
 import { useRouter } from "next/router";
 import GemmerHeader from "../../../components/Gemmer/GemmerHeader";
 import getAuthToken from "../../../utils/helpers/getAuthToken";
-import getCurrentUserId from "../../../utils/helpers/getCurrentUserId";
+import getUserIdByToken from "../../../utils/helpers/getUserIdByToken";
 import getUserData from "../../../utils/helpers/getUserData";
 import getGemsByUser from "../../../utils/helpers/getGemsByUser";
 import Masonry from "../../../components/Masonry/Masonry";
@@ -31,7 +31,7 @@ const GemmerDetails = ({
   return (
     <section className={styles.gemmer}>
       <GemmerHeader gemmer={gemmer} isSameUser={isSameUser} />
-      <Masonry gems={gems} users={users} />
+      <Masonry gems={gems} users={users} gemmer={gemmer} />
     </section>
   );
 };
@@ -40,7 +40,7 @@ export default GemmerDetails;
 
 export async function getServerSideProps(context) {
   const authToken = getAuthToken(context);
-  const currentUserId = await getCurrentUserId(authToken);
+  const currentUserId = await getUserIdByToken(authToken);
 
   // Redirect if failed to authenticate
   // If currentUserId is not found, then authToken will be considered as invalid by Firebase

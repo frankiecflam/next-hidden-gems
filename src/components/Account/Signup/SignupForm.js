@@ -129,10 +129,10 @@ const SignupForm = ({ onSuccessfulSignup, onUnsuccessfulSignup }) => {
       bio: "",
       joinedOn: new Date(Date.now()),
       profileImage: "",
-      gems: [],
-      collection: [],
-      following: [],
-      followers: [],
+      gems: JSON.stringify([]),
+      collection: JSON.stringify([]),
+      following: JSON.stringify([]),
+      followers: JSON.stringify([]),
     };
 
     await fetch("/api/createuser", {

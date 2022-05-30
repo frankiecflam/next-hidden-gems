@@ -1,7 +1,6 @@
+import { databaseURL } from "../../firebase";
 async function getAllUsers() {
-  const response = await fetch(
-    "https://react-hidden-gems-default-rtdb.europe-west1.firebasedatabase.app/user.json"
-  );
+  const response = await fetch(`${databaseURL}/user.json`);
 
   const data = await response.json();
 

@@ -2,11 +2,16 @@ import styles from "./ExploreHeader.module.css";
 import SearchBar from "../UI/SearchBar";
 import Category from "./Category";
 
-const ExploreHeader = () => {
+const ExploreHeader = ({
+  onCategoryChange,
+  onSearchChange,
+  categories,
+  searchTerm,
+}) => {
   return (
     <header className={styles.header}>
-      <SearchBar />
-      <Category />
+      <SearchBar onSearchChange={onSearchChange} value={searchTerm} />
+      <Category onCategoryChange={onCategoryChange} categories={categories} />
     </header>
   );
 };

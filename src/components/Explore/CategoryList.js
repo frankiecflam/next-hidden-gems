@@ -2,25 +2,27 @@ import "./CategoryList.module.css";
 import CategoryItem from "./CategoryItem";
 import styles from "./CategoryList.module.css";
 import { useState } from "react";
+import categoryIdForAll from "../../utils/constants/categoryIdForAll";
 
-const DUMMY_DATA = ["all", "sports", "travel", "fashion", "scenery"];
-
-const CategoryList = () => {
-  const [categoryItemActive, setCategoryItemActive] = useState("all");
+const CategoryList = ({ onCategoryChange, categories }) => {
+  const [categoryItemActive, setCategoryItemActive] =
+    useState(categoryIdForAll);
 
   const handleItemClick = (id) => {
     setCategoryItemActive(id);
+    onCategoryChange(id);
   };
 
   return (
     <ul className={styles.list}>
-      {DUMMY_DATA.map((cat) => {
+      {categories.map((cat) => {
         return (
           <CategoryItem
             onClick={handleItemClick}
-            name={cat}
-            isActive={cat === categoryItemActive}
-            key={cat}
+            name={cat.name}
+            id={cat.id}
+            isActive={cat.id === categoryItemActive}
+            key={cat.id}
           />
         );
       })}

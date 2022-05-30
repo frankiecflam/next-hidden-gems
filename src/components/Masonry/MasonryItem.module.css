@@ -1,0 +1,47 @@
+.item {
+  position: relative;
+  background-color: red;
+}
+
+.author {
+  position: absolute;
+  color: #fff;
+  bottom: 3%;
+  right: 5%;
+  font-size: 1.2rem;
+}
+
+.collectionIcon {
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  font-size: 2rem;
+}
+
+.author,
+.collectionIcon {
+  opacity: 0;
+  z-index: 1;
+}
+.overlay,
+.author,
+.collectionIcon {
+  transition: all 0.3s;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+}
+
+.active .overlay,
+.active .author,
+.active .collectionIcon {
+  opacity: 1;
+}

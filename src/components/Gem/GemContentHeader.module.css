@@ -7,12 +7,12 @@
 }
 
 .profileImage {
-  width: 10rem;
-  height: 10rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 100%;
 }
 
 .authorName {
   color: #464646;
-  font-size: 2.5rem;
+  font-size: 1.6rem;
 }

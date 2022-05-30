@@ -1,7 +1,7 @@
 import { db } from "../../firebase";
 import { ref, update } from "firebase/database";
 
-async function updateGemmerProfile(newData, gemmerDbKey) {
+async function updateGemmerData(newData, gemmerDbKey) {
   const userRef = ref(db, `user/${gemmerDbKey}`);
 
   // Update DB
@@ -10,4 +10,4 @@ async function updateGemmerProfile(newData, gemmerDbKey) {
   return true;
 }
 
-export default updateGemmerProfile;
+export default updateGemmerData;

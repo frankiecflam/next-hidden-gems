@@ -7,8 +7,8 @@ import EditBtn from "../Buttons/EditBtn";
 const GemmerInfo = ({ gemmer, isSameUser, onEditClick }) => {
   const { profileImage, username, gems, followers, bio } = gemmer;
 
-  const gemsNum = gems ? gems.length : 0;
-  const followersNum = followers ? followers.length : 0;
+  const gemsNum = JSON.parse(gems).length;
+  const followersNum = JSON.parse(followers).length;
   return (
     <Fragment>
       <img

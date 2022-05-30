@@ -1,13 +1,6 @@
 import styles from "./GemModal.module.css";
 import GemContent from "./GemContent";
-
-function findAuthorById(users, id) {
-  for (const key in users) {
-    if (users[key].id === id) {
-      return users[key];
-    }
-  }
-}
+import findAuthorById from "../../utils/helpers/findAuthorById";
 
 const GemModal = ({ item, users }) => {
   const author = findAuthorById(users, item.createdBy);

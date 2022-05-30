@@ -1,4 +1,4 @@
-async function getCurrentUserId(idToken) {
+async function getUserIdByToken(idToken) {
   const response = await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.FIREBASE_API_KEY}`,
     {
@@ -20,4 +20,4 @@ async function getCurrentUserId(idToken) {
   return userId;
 }
 
-export default getCurrentUserId;
+export default getUserIdByToken;

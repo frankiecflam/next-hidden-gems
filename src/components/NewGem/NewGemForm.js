@@ -2,17 +2,20 @@ import styles from "./NewGemForm.module.css";
 import SubmitBtn from "../Buttons/SubmitBtn";
 import useFileReader from "../../utils/hooks/useFileReader";
 import uploadImageToFirebase from "../../utils/helpers/uploadImageToFirebase";
+import updateGemmerData from "../../utils/helpers/updateGemmerData";
+import popoutGemmerDbKey from "../../utils/helpers/popoutGemmerDbKey";
 import { useState } from "react";
 import { v4 } from "uuid";
 import { useRouter } from "next/router";
+import categoryIdForAll from "../../utils/constants/categoryIdForAll";
 
-const NewGemForm = ({ gemmer }) => {
+const NewGemForm = ({ gemmer, categories }) => {
   const { file, fileDataURL, handleFileChange } = useFileReader();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("default");
 
-  const { username, profileImage, id } = gemmer;
+  const { username, profileImage, id, gemmerDbKey } = gemmer;
   const router = useRouter();
 
   const handleFormSubmit = async (e) => {
@@ -22,8 +25,10 @@ const NewGemForm = ({ gemmer }) => {
     if (!file) return;
     const image = await uploadImageToFirebase(file, "gems");
 
+    // Create a new gem
+    const gemId = id + v4();
     const gem = {
-      id: id + v4(),
+      id: gemId,
       title,
       description,
       category,
@@ -32,7 +37,7 @@ const NewGemForm = ({ gemmer }) => {
       createdBy: id,
     };
 
-    const response = await fetch("/api/creategem", {
+    const createGemResponse = await fetch("/api/creategem", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,8 +45,26 @@ const NewGemForm = ({ gemmer }) => {
       body: JSON.stringify(gem),
     });
 
-    if (!response.ok) return;
-    
+    if (!createGemResponse.ok) return;
+
+    // update gemmer's gems
+    const modifiedGemmerObj = popoutGemmerDbKey(gemmer);
+    // Parse gems into an array first
+    let updatedGems = JSON.parse(gemmer.gems);
+    updatedGems.push(gemId);
+
+    const updatedGemmerData = {
+      ...modifiedGemmerObj,
+      gems: JSON.stringify(updatedGems),
+    };
+
+    const updateGemmerDataResponse = await updateGemmerData(
+      updatedGemmerData,
+      gemmerDbKey
+    );
+
+    if (!updateGemmerDataResponse) return;
+
     router.push("/");
   };
 
@@ -103,10 +126,16 @@ const NewGemForm = ({ gemmer }) => {
           <option value={"default"} disabled>
             Please select a category
           </option>
-          <option value={"fashion"}>Fashion</option>
-          <option value={"sports"}>Sports</option>
-          <option value={"travel"}>travel</option>
-          <option value={"scenery"}>scenery</option>
+
+          {categories
+            .filter((cat) => cat.id !== categoryIdForAll)
+            .map((category) => {
+              return (
+                <option value={category.id} key={category.id}>
+                  {category.name}
+                </option>
+              );
+            })}
         </select>
         <SubmitBtn className={`${styles.btn} ${styles.fullGrid}`} />
       </div>

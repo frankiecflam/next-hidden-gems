@@ -1,10 +1,6 @@
 import styles from "./CollectionSort.module.css";
 
-const CollectionSort = () => {
-  const handleSelectChange = (e) => {
-    console.log(e.target.value);
-  };
-
+const CollectionSort = ({ onSortChange }) => {
   return (
     <div className={styles.collectionSort}>
       <label htmlFor="criterion" className={styles.label}>
@@ -12,13 +8,13 @@ const CollectionSort = () => {
       </label>
       <select
         className={styles.select}
-        onChange={handleSelectChange}
+        onChange={(e) => onSortChange(e.target.value)}
         id="criterion"
       >
-        <option className={styles.option} value={"newest"}>
+        <option className={styles.option} value={"DATE"}>
           newest
         </option>
-        <option className={styles.option} value={"category"}>
+        <option className={styles.option} value={"CATEGORY"}>
           category
         </option>
       </select>
