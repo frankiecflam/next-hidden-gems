@@ -15,7 +15,7 @@ const HomeHero = () => {
           <span>To inspire</span>
           <span>Be inspired</span>
         </p>
-        <DiscoverBtn className={styles.btn} />
+        <DiscoverBtn />
       </div>
       <img src={Hero_Section_Gallery.src} className={styles.image} />
     </div>

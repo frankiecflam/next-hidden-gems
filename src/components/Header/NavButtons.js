@@ -78,18 +78,20 @@ const NavButtons = ({ isAuthenticated }) => {
     <div className={styles.navButtons}>
       {!isAuthenticated && (
         <Fragment>
-          <LoginBtn
-            onClick={handleLoginBtnClick}
-            onModalClose={handleModalClose}
-            onToggleBtnClick={handleToggleBtnClick}
-            showLoginModal={accountBtnState.loginModalActive}
-          />
-          <SignupBtn
-            onClick={handleSignupBtnClick}
-            showSignupModal={accountBtnState.signupModalActive}
-            onToggleBtnClick={handleToggleBtnClick}
-            onModalClose={handleModalClose}
-          />
+          <Fragment>
+            <LoginBtn
+              onClick={handleLoginBtnClick}
+              onModalClose={handleModalClose}
+              onToggleBtnClick={handleToggleBtnClick}
+              showLoginModal={accountBtnState.loginModalActive}
+            />
+            <SignupBtn
+              onClick={handleSignupBtnClick}
+              showSignupModal={accountBtnState.signupModalActive}
+              onToggleBtnClick={handleToggleBtnClick}
+              onModalClose={handleModalClose}
+            />
+          </Fragment>
         </Fragment>
       )}
 

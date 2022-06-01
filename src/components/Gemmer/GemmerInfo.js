@@ -1,28 +1,39 @@
 import styles from "./GemmerInfo.module.css";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { defaultImage } from "../../assets/images";
 
 import FollowBtn from "../Buttons/FollowBtn";
 import EditBtn from "../Buttons/EditBtn";
 
-const GemmerInfo = ({ gemmer, isSameUser, onEditClick }) => {
+const GemmerInfo = ({ gemmer, isSameUser, onEditClick, currentUser }) => {
   const { profileImage, username, gems, followers, bio } = gemmer;
+  const [followersNum, setFollowersNum] = useState(
+    JSON.parse(followers).length
+  );
 
   const gemsNum = JSON.parse(gems).length;
-  const followersNum = JSON.parse(followers).length;
+
+  const handleFollowerUpdate = (action) => {
+    action === "follow" && setFollowersNum((prevState) => prevState + 1);
+    action === "unfollow" && setFollowersNum((prevState) => prevState - 1);
+  };
+
   return (
     <Fragment>
       <img
-        src={
-          profileImage
-            ? profileImage
-            : "https://randomuser.me/api/portraits/men/32.jpg"
-        }
-        className={styles.gemmerPicture}
+        src={profileImage ? profileImage : defaultImage.src}
+        className={profileImage ? styles.gemmerPicture : styles.defaultImage}
       />
       <div className={styles.gemmerInfo}>
         <div className={styles.flex}>
           <p className={styles.username}>{username}</p>
-          {!isSameUser && <FollowBtn />}
+          {!isSameUser && (
+            <FollowBtn
+              gemmer={gemmer}
+              currentUser={currentUser}
+              onFollowingChange={handleFollowerUpdate}
+            />
+          )}
           {isSameUser && <EditBtn onClick={onEditClick} />}
         </div>
         <div className={styles.flex}>

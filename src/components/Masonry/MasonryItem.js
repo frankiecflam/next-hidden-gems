@@ -5,16 +5,12 @@ import findAuthorById from "../../utils/helpers/findAuthorById";
 import CollectionSaveIcon from "../Collection/CollectionSaveIcon";
 import checkCollectionItemExisted from "../../utils/helpers/checkCollectionItemExisted";
 
-const MasonryItem = ({ item, users, gemmer }) => {
+const MasonryItem = ({ item, users, onCollectionChange, collection }) => {
   const { image, id: itemId } = item;
-  const { collection } = gemmer;
   const author = findAuthorById(users, item.createdBy);
-
   const [showItemModal, setShowItemModal] = useState(false);
   const [overlayActive, setOverlayActive] = useState(false);
-  const [collectionExisted, setCollectionExisted] = useState(
-    checkCollectionItemExisted(collection, itemId)
-  );
+  const itemExisted = checkCollectionItemExisted(collection, itemId);
 
   const handleImageClick = () => {
     setShowItemModal((prevState) => !prevState);
@@ -26,10 +22,6 @@ const MasonryItem = ({ item, users, gemmer }) => {
 
   const handleOverlayMouseOut = () => {
     setOverlayActive(false);
-  };
-
-  const handleCollectionExistedChange = () => {
-    setCollectionExisted((prevState) => !prevState);
   };
 
   return (
@@ -50,11 +42,10 @@ const MasonryItem = ({ item, users, gemmer }) => {
       </p>
       <CollectionSaveIcon
         className={styles.collectionIcon}
+        itemExisted={itemExisted}
+        item={item}
         onMouseEnter={handleOverlayMouseEnter}
-        gemId={itemId}
-        existed={collectionExisted}
-        onExistenceChange={handleCollectionExistedChange}
-        gemmer={gemmer}
+        onCollectionChange={onCollectionChange}
       />
       {showItemModal && (
         <Gem item={item} users={users} onCloseModal={handleImageClick} />

@@ -11,10 +11,13 @@ import getAllCategories from "../../utils/helpers/getCategories";
 import getGemsBySearchTerm from "../../utils/helpers/getGemsBySearchTerm";
 import getCategoryNameById from "../../utils/helpers/getCategoryNameById";
 import getUserData from "../../utils/helpers/getUserData";
+import getGemsFromCollection from "../../utils/helpers/getGemsFromCollection";
+import updateCollection from "../../utils/helpers/updateCollection";
 
-const Explore = ({ gems, users, categories, gemmer }) => {
+const Explore = ({ gems, users, categories, gemmer, collectionGems }) => {
   const [filterCategory, setFilterCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [collection, setCollection] = useState(collectionGems);
 
   const filteredGems = filterGemsByCategory(gems, filterCategory);
   const searchedGems = searchTerm
@@ -27,6 +30,18 @@ const Explore = ({ gems, users, categories, gemmer }) => {
 
   const handleSearchTermChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleCollectionChange = async (itemExisted, item) => {
+    await updateCollection(gemmer, collection, itemExisted, item);
+
+    if (itemExisted) {
+      setCollection((prevState) =>
+        prevState.filter((collectionItem) => collectionItem.id !== item.id)
+      );
+    } else {
+      setCollection((prevState) => [...prevState, item]);
+    }
   };
 
   const filteredCategoryName = getCategoryNameById(categories, filterCategory);
@@ -45,6 +60,8 @@ const Explore = ({ gems, users, categories, gemmer }) => {
         category={filteredCategoryName}
         searchTerm={searchTerm}
         gemmer={gemmer}
+        collection={collection}
+        onCollectionChange={handleCollectionChange}
       />
     </section>
   );
@@ -71,6 +88,7 @@ export async function getServerSideProps(context) {
   const users = await getAllUsers();
   const categories = await getAllCategories();
   const gemmer = await getUserData(currentUserId);
+  const collectionGems = await getGemsFromCollection(currentUserId);
 
   return {
     props: {
@@ -78,6 +96,7 @@ export async function getServerSideProps(context) {
       gemmer,
       users,
       categories,
+      collectionGems,
     },
   };
 }

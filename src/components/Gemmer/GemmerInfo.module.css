@@ -27,3 +27,11 @@
 .followersNum {
   font-weight: 600;
 }
+
+.defaultImage {
+  justify-self: center;
+  border-radius: 100%;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}

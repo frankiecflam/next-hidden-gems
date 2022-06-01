@@ -1,8 +1,6 @@
 function checkCollectionItemExisted(collection, id) {
-  // Parse collection
-  let gemmerCollection = JSON.parse(collection);
-
-  return gemmerCollection.filter((gemId) => gemId === id).length > 0;
+  // Collection argument must be an array containing gem objects
+  return collection.filter((item) => item.id === id).length > 0;
 }
 
 export default checkCollectionItemExisted;

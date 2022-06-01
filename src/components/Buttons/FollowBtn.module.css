@@ -1,4 +1,9 @@
-.btn {
+.btnFollow {
   background-color: #1c96ca;
+  color: #fff;
+}
+
+.btnUnfollow {
+  background-color: #72c7ec;
   color: #fff;
 }

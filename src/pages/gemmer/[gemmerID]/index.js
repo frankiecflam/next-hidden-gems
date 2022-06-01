@@ -1,5 +1,6 @@
 import styles from "./index.module.css";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import GemmerHeader from "../../../components/Gemmer/GemmerHeader";
 import getAuthToken from "../../../utils/helpers/getAuthToken";
 import getUserIdByToken from "../../../utils/helpers/getUserIdByToken";
@@ -8,6 +9,8 @@ import getGemsByUser from "../../../utils/helpers/getGemsByUser";
 import Masonry from "../../../components/Masonry/Masonry";
 import getAllUsers from "../../../utils/helpers/getAllUsers";
 import GemmerNotFound from "../../../components/Gemmer/GemmerNotFound";
+import getGemsFromCollection from "../../../utils/helpers/getGemsFromCollection";
+import updateCollection from "../../../utils/helpers/updateCollection";
 
 const GemmerDetails = ({
   queryIdValid,
@@ -16,6 +19,8 @@ const GemmerDetails = ({
   gemmer,
   gems,
   users,
+  currentUser,
+  collectionGems,
 }) => {
   if (!queryIdValid) {
     return (
@@ -27,11 +32,34 @@ const GemmerDetails = ({
 
   const { gemmerId } = useRouter().query;
   const isSameUser = gemmerId === currentUserId;
+  const [collection, setCollection] = useState(collectionGems);
+
+  const handleCollectionChange = async (itemExisted, item) => {
+    await updateCollection(gemmer, collection, itemExisted, item);
+
+    if (itemExisted) {
+      setCollection((prevState) =>
+        prevState.filter((collectionItem) => collectionItem.id !== item.id)
+      );
+    } else {
+      setCollection((prevState) => [...prevState, item]);
+    }
+  };
 
   return (
     <section className={styles.gemmer}>
-      <GemmerHeader gemmer={gemmer} isSameUser={isSameUser} />
-      <Masonry gems={gems} users={users} gemmer={gemmer} />
+      <GemmerHeader
+        gemmer={gemmer}
+        isSameUser={isSameUser}
+        currentUser={currentUser}
+      />
+      <Masonry
+        gems={gems}
+        users={users}
+        gemmer={gemmer}
+        collection={collection}
+        onCollectionChange={handleCollectionChange}
+      />
     </section>
   );
 };
@@ -68,6 +96,8 @@ export async function getServerSideProps(context) {
 
   const gems = await getGemsByUser(gemmerId);
   const users = await getAllUsers();
+  const currentUser = await getUserData(currentUserId);
+  const collectionGems = await getGemsFromCollection(currentUserId);
 
   return {
     props: {
@@ -76,6 +106,8 @@ export async function getServerSideProps(context) {
       gemmer,
       gems,
       users,
+      currentUser,
+      collectionGems,
     },
   };
 }

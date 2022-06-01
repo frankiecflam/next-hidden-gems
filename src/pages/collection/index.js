@@ -9,25 +9,40 @@ import Masonry from "../../components/Masonry/Masonry";
 import CollectionEmpty from "../../components/Collection/CollectionEmpty";
 import getCategories from "../../utils/helpers/getCategories";
 import { useState } from "react";
+import updateCollection from "../../utils/helpers/updateCollection";
 
-const Collection = ({ gemmer, collectionGems, users, categories }) => {
+const Collection = ({ gemmer, gems, users, categories }) => {
   const [sortingCriterion, setSortingCriterion] = useState("DATE");
+  // Collection should reflect instant changes without fetching data from DB. Initial state = gems
+  const [collection, setCollection] = useState(gems);
+
+  // Item must exist in collection so unncessary to consider inexisted case
+  const handleCollectionChange = async (itemExisted, item) => {
+    await updateCollection(gemmer, collection, itemExisted, item);
+
+    setCollection((prevState) =>
+      prevState.filter((collectionItem) => collectionItem.id !== item.id)
+    );
+  };
 
   const handleSortingChange = (criterion) => {
     setSortingCriterion(criterion);
   };
 
-  const emptyCollection = collectionGems.length === 0;
+  const emptyCollection = collection.length === 0;
+
   return (
     <section className={styles.collection}>
       <CollectionHeader onSortChange={handleSortingChange} />
       {!emptyCollection && (
         <Masonry
-          gems={collectionGems}
+          gems={collection}
           users={users}
           gemmer={gemmer}
           sortingCriterion={sortingCriterion}
           categories={categories}
+          collection={collection}
+          onCollectionChange={handleCollectionChange}
         />
       )}
       {emptyCollection && <CollectionEmpty />}
@@ -53,13 +68,13 @@ export async function getServerSideProps(context) {
   }
   const gemmer = await getUserData(currentUserId);
   const users = await getAllUsers();
-  const collectionGems = await getGemsFromCollection(currentUserId);
+  const gems = await getGemsFromCollection(currentUserId);
   const categories = await getCategories();
 
   return {
     props: {
       gemmer,
-      collectionGems,
+      gems,
       users,
       categories,
     },
