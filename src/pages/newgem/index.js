@@ -1,4 +1,4 @@
-import styles from "./Index.module.css";
+import styles from "./IndexPage.module.css";
 import getAuthToken from "../../utils/helpers/getAuthToken";
 import getUserIdByToken from "../../utils/helpers/getUserIdByToken";
 import NewGemForm from "../../components/NewGem/NewGemForm";

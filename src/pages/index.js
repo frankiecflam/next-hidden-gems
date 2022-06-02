@@ -1,4 +1,4 @@
-import styles from "./Index.module.css";
+import styles from "./IndexPage.module.css";
 import HomeHero from "../components/Home/HomeHero";
 import Masonry from "../components/Masonry/Masonry";
 import getAuthToken from "../utils/helpers/getAuthToken";
@@ -9,7 +9,6 @@ import getUserData from "../utils/helpers/getUserData";
 import { useState } from "react";
 import getGemsFromCollection from "../utils/helpers/getGemsFromCollection";
 import updateCollection from "../utils/helpers/updateCollection";
-
 
 const Home = ({ isAuthenticated, gems, users, gemmer, collectionGems }) => {
   const [collection, setCollection] = useState(collectionGems);
