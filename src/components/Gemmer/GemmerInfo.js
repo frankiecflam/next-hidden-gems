@@ -1,6 +1,6 @@
 import styles from "./GemmerInfo.module.css";
 import { Fragment, useState, forwardRef } from "react";
-import { defaultImage } from "../../assets/images";
+import defaultImage from "../../assets/images/defaultProfileImage.png";
 import Image from "next/image";
 
 import FollowBtn from "../Buttons/FollowBtn";
