@@ -1,5 +1,5 @@
 import styles from "./HomeHero.module.css";
-import { Hero_Section_Gallery } from "../../assets/images";
+import { Hero_Section_Gallery } from "../../assets/images/Index";
 import DiscoverBtn from "../Buttons/DiscoverBtn";
 import { forwardRef } from "react";
 import Image from "next/image";
@@ -19,6 +19,7 @@ const HeroSectionImage = forwardRef(({ image }, ref) => {
 });
 
 HeroSectionImage.displayName = "HeroSectionImage";
+
 
 const HomeHero = () => {
   return (
