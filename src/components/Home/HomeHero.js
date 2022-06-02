@@ -1,5 +1,5 @@
 import styles from "./HomeHero.module.css";
-import { Hero_Section_Gallery } from "../../assets/images";
+import Hero_Section_Gallery from "../../assets/images/Hero-section-gallery-img.webp";
 import DiscoverBtn from "../Buttons/DiscoverBtn";
 import { forwardRef } from "react";
 import Image from "next/image";
