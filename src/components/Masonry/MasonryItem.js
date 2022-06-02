@@ -1,9 +1,26 @@
 import styles from "./MasonryItem.module.css";
 import Gem from "../Gem/Gem";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
+import Image from "next/image";
 import findAuthorById from "../../utils/helpers/findAuthorById";
 import CollectionSaveIcon from "../Collection/CollectionSaveIcon";
 import checkCollectionItemExisted from "../../utils/helpers/checkCollectionItemExisted";
+
+const MasonryItemImage = forwardRef(({ image }, ref) => {
+  return (
+    <div ref={ref}>
+      <Image
+        src={image}
+        width={320}
+        height={480}
+        className={styles.image}
+        alt="gem post's image"
+      />
+    </div>
+  );
+});
+
+MasonryItemImage.displayName = "MasonryItemImage";
 
 const MasonryItem = ({ item, users, onCollectionChange, collection }) => {
   const { image, id: itemId } = item;
@@ -36,7 +53,7 @@ const MasonryItem = ({ item, users, onCollectionChange, collection }) => {
         onMouseEnter={handleOverlayMouseEnter}
         onMouseOut={handleOverlayMouseOut}
       />
-      <img className={styles.image} src={image} />
+      <MasonryItemImage image={image} />
       <p className={styles.author} onMouseEnter={handleOverlayMouseEnter}>
         @{author.username}
       </p>

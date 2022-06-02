@@ -2,11 +2,28 @@ import styles from "./GemmerEditForm.module.css";
 import useFileReader from "../../utils/hooks/useFileReader";
 
 import SubmitBtn from "../Buttons/SubmitBtn";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import updateGemmerData from "../../utils/helpers/updateGemmerData";
 import uploadImageToFirebase from "../../utils/helpers/uploadImageToFirebase";
 import { useRouter } from "next/router";
 import popoutGemmerDbKey from "../../utils/helpers/popoutGemmerDbKey";
+import Image from "next/image";
+
+const NewGemmerProfilePicture = forwardRef(({ fileDataURL }, ref) => {
+  return (
+    <div ref={ref}>
+      <Image
+        src={fileDataURL}
+        className={styles.profilePicture}
+        alt="gemmer's new profile image"
+        width={150}
+        height={150}
+      />
+    </div>
+  );
+});
+
+NewGemmerProfilePicture.displayName = "NewGemmerProfilePicture";
 
 const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
   const { username, bio, gemmerDbKey, profileImage } = gemmer;
@@ -49,7 +66,7 @@ const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
   return (
     <form className={styles.form} onSubmit={handleFormSubmit}>
       <div className={styles.pictureFormControl}>
-        <img src={fileDataURL} className={styles.profilePicture} />
+        <NewGemmerProfilePicture fileDataURL={fileDataURL} />
         <input
           type="file"
           className={styles.inputPicture}

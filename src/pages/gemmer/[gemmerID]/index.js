@@ -22,6 +22,9 @@ const GemmerDetails = ({
   currentUser,
   collectionGems,
 }) => {
+  const { gemmerId } = useRouter().query;
+  const [collection, setCollection] = useState(collectionGems);
+
   if (!queryIdValid) {
     return (
       <section className={styles.gemmer}>
@@ -30,9 +33,7 @@ const GemmerDetails = ({
     );
   }
 
-  const { gemmerId } = useRouter().query;
   const isSameUser = gemmerId === currentUserId;
-  const [collection, setCollection] = useState(collectionGems);
 
   const handleCollectionChange = async (itemExisted, item) => {
     await updateCollection(gemmer, collection, itemExisted, item);

@@ -21,7 +21,7 @@ const AccountFooter = ({
           <div>
             <p>Or</p>
             {signupModalActive && <p>if you already have an account,</p>}
-            {loginModalActive && <p>if you don't have an account,</p>}
+            {loginModalActive && <p>if you do not have an account,</p>}
           </div>
           <AccountToggleBtn
             text={toggleBtnText}

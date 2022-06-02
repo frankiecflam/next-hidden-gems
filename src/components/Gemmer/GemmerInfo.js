@@ -1,6 +1,7 @@
 import styles from "./GemmerInfo.module.css";
-import { Fragment, useState } from "react";
+import { Fragment, useState, forwardRef } from "react";
 import { defaultImage } from "../../assets/images";
+import Image from "next/image";
 
 import FollowBtn from "../Buttons/FollowBtn";
 import EditBtn from "../Buttons/EditBtn";
@@ -8,51 +9,21 @@ import checkFollowing from "../../utils/helpers/checkFollowing";
 import updateGemmerData from "../../utils/helpers/updateGemmerData";
 import popoutGemmerDbKey from "../../utils/helpers/popoutGemmerDbKey";
 
-// async function updateCurrentUserFollowing(
-//   currentUser,
-//   currentUserDbKey,
-//   gemmerId,
-//   isFollowing
-// ) {
-//   let updatedCurrentUserData = popoutGemmerDbKey(currentUser);
-//   let updatedFollowing = JSON.parse(currentUser.following);
+const GemmerProfileImage = forwardRef(({ image, hasProfileImage }, ref) => {
+  return (
+    <div ref={ref} className={styles.imageContainer}>
+      <Image
+        className={hasProfileImage ? styles.gemmerPicture : styles.defaultImage}
+        alt="gemmer's profile image"
+        src={image}
+        width={hasProfileImage ? 200 : 100}
+        height={hasProfileImage ? 200 : 100}
+      />
+    </div>
+  );
+});
 
-//   if (!isFollowing) {
-//     updatedFollowing.push(gemmerId);
-//   } else {
-//     updatedFollowing = updatedFollowing.filter((id) => id !== gemmerId);
-//   }
-
-//   updatedCurrentUserData = {
-//     ...updatedCurrentUserData,
-//     following: JSON.stringify(updatedFollowing),
-//   };
-
-//   await updateGemmerData(updatedCurrentUserData, currentUserDbKey);
-// }
-
-// async function updateGemmerFollowers(
-//   gemmer,
-//   gemmerDbKey,
-//   currentUserId,
-//   isFollowing
-// ) {
-//   let updatedGemmerData = popoutGemmerDbKey(gemmer);
-//   let updatedFollowers = JSON.parse(gemmer.followers);
-
-//   if (!isFollowing) {
-//     updatedFollowers.push(currentUserId);
-//   } else {
-//     updatedFollowers = updatedFollowers.filter((id) => id !== currentUserId);
-//   }
-
-//   updatedGemmerData = {
-//     ...updatedGemmerData,
-//     followers: JSON.stringify(updatedFollowers),
-//   };
-
-//   await updateGemmerData(updatedGemmerData, gemmerDbKey);
-// }
+GemmerProfileImage.displayName = "GemmerProfileImage";
 
 const GemmerInfo = ({ gemmer, isSameUser, onEditClick, currentUser }) => {
   const { profileImage, username, gems, followers, bio, id: gemmerId } = gemmer;
@@ -117,9 +88,9 @@ const GemmerInfo = ({ gemmer, isSameUser, onEditClick, currentUser }) => {
 
   return (
     <Fragment>
-      <img
-        src={profileImage ? profileImage : defaultImage.src}
-        className={profileImage ? styles.gemmerPicture : styles.defaultImage}
+      <GemmerProfileImage
+        image={profileImage ? profileImage : defaultImage.src}
+        hasProfileImage={profileImage ? true : false}
       />
       <div className={styles.gemmerInfo}>
         <div className={styles.flex}>

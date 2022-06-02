@@ -1,8 +1,5 @@
 import styles from "./FollowBtn.module.css";
 import Button from "../UI/Button";
-// import updateGemmerData from "../../utils/helpers/updateGemmerData";
-// import popoutGemmerDbKey from "../../utils/helpers/popoutGemmerDbKey";
-
 
 const FollowBtn = ({ onFollowingChange, isFollowing }) => {
   return (

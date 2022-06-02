@@ -1,6 +1,24 @@
 import styles from "./HomeHero.module.css";
 import { Hero_Section_Gallery } from "../../assets/images";
 import DiscoverBtn from "../Buttons/DiscoverBtn";
+import { forwardRef } from "react";
+import Image from "next/image";
+
+const HeroSectionImage = forwardRef(({ image }, ref) => {
+  return (
+    <div ref={ref}>
+      <Image
+        src={image}
+        width={2160}
+        height={2987}
+        className={styles.image}
+        alt="hero section's background image"
+      />
+    </div>
+  );
+});
+
+HeroSectionImage.displayName = "HeroSectionImage";
 
 const HomeHero = () => {
   return (
@@ -17,7 +35,7 @@ const HomeHero = () => {
         </p>
         <DiscoverBtn />
       </div>
-      <img src={Hero_Section_Gallery.src} className={styles.image} />
+      <HeroSectionImage image={Hero_Section_Gallery.src} />
     </div>
   );
 };

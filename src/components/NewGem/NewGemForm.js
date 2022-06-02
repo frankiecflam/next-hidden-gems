@@ -4,10 +4,43 @@ import useFileReader from "../../utils/hooks/useFileReader";
 import uploadImageToFirebase from "../../utils/helpers/uploadImageToFirebase";
 import updateGemmerData from "../../utils/helpers/updateGemmerData";
 import popoutGemmerDbKey from "../../utils/helpers/popoutGemmerDbKey";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { v4 } from "uuid";
 import { useRouter } from "next/router";
 import categoryIdForAll from "../../utils/constants/categoryIdForAll";
+import Image from "next/image";
+
+const GemmerProfileImage = forwardRef(({ image }, ref) => {
+  return (
+    <div ref={ref}>
+      <Image
+        src={image}
+        width={80}
+        height={80}
+        className={styles.gemmerImg}
+        alt="gemmer's profile image"
+      />
+    </div>
+  );
+});
+
+GemmerProfileImage.displayName = "GemmerProfileImage";
+
+const NewGemImage = forwardRef(({ fileDataURL }, ref) => {
+  return (
+    <div ref={ref} className={styles.filePreview}>
+      <Image
+        src={fileDataURL}
+        width={448}
+        height={672}
+        alt="new gem's image"
+        layout="fill"
+      />
+    </div>
+  );
+});
+
+NewGemImage.displayName = "NewGemImage";
 
 const NewGemForm = ({ gemmer, categories }) => {
   const { file, fileDataURL, handleFileChange } = useFileReader();
@@ -85,13 +118,11 @@ const NewGemForm = ({ gemmer, categories }) => {
       <h1 className={styles.heading}>new gem</h1>
       <div className={styles.formBody}>
         <div className={styles.gemmer}>
-          {profileImage && (
-            <img className={styles.gemmerImg} src={profileImage} />
-          )}
+          {profileImage && <GemmerProfileImage image={profileImage} />}
           <p className={styles.gemmerName}>{username}</p>
         </div>
         <div className={styles.fileUpload}>
-          <img className={styles.filePreview} src={fileDataURL} />
+          {fileDataURL && <NewGemImage fileDataURL={fileDataURL} />}
           <input
             type="file"
             accept="image/*"

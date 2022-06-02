@@ -35,3 +35,7 @@
   height: 10rem;
   object-fit: cover;
 }
+
+.imageContainer {
+  margin: 0 auto;
+}
