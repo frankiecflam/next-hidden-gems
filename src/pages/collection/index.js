@@ -1,4 +1,4 @@
-import styles from "./index.module.css";
+import styles from "./Index.module.css";
 import CollectionHeader from "../../components/Collection/CollectionHeader";
 import getAuthToken from "../../utils/helpers/getAuthToken";
 import getUserIdByToken from "../../utils/helpers/getUserIdByToken";
