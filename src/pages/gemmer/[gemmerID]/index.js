@@ -1,4 +1,4 @@
-import styles from "./Index.module.css";
+import styles from "./IndexPage.module.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import GemmerHeader from "../../../components/Gemmer/GemmerHeader";
