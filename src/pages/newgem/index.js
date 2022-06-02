@@ -37,6 +37,7 @@ export async function getServerSideProps(context) {
     props: {
       gemmer,
       categories,
+      currentUserId,
     },
   };
 }

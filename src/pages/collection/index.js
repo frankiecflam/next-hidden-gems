@@ -77,6 +77,7 @@ export async function getServerSideProps(context) {
       gems,
       users,
       categories,
+      currentUserId,
     },
   };
 }

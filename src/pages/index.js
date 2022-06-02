@@ -68,6 +68,7 @@ export async function getServerSideProps(context) {
       collectionGems,
       users,
       gemmer,
+      currentUserId,
     },
   };
 }
