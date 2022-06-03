@@ -4,12 +4,23 @@ import getUserIdByToken from "../../utils/helpers/getUserIdByToken";
 import NewGemForm from "../../components/NewGem/NewGemForm";
 import getUserData from "../../utils/helpers/getUserData";
 import getAllCategories from "../../utils/helpers/getCategories";
+import Head from "next/head";
+import { Fragment } from "react";
 
 const NewGem = ({ gemmer, categories }) => {
   return (
-    <section className={styles.newgem}>
-      <NewGemForm gemmer={gemmer} categories={categories} />
-    </section>
+    <Fragment>
+      <Head>
+        <title>Hidden Gems — New Gem</title>
+        <meta
+          name="description"
+          content="Share a new hidden gem that surprises people."
+        />
+      </Head>
+      <section className={styles.newgem}>
+        <NewGemForm gemmer={gemmer} categories={categories} />
+      </section>
+    </Fragment>
   );
 };
 

@@ -7,8 +7,9 @@ import getAllUsers from "../../utils/helpers/getAllUsers";
 import Masonry from "../../components/Masonry/Masonry";
 import CollectionEmpty from "../../components/Collection/CollectionEmpty";
 import getCategories from "../../utils/helpers/getCategories";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import updateCollection from "../../utils/helpers/updateCollection";
+import Head from "next/head";
 
 const Collection = ({ gemmer, gems, users, categories }) => {
   const [sortingCriterion, setSortingCriterion] = useState("DATE");
@@ -31,21 +32,30 @@ const Collection = ({ gemmer, gems, users, categories }) => {
   const emptyCollection = collection.length === 0;
 
   return (
-    <section>
-      <CollectionHeader onSortChange={handleSortingChange} />
-      {!emptyCollection && (
-        <Masonry
-          gems={collection}
-          users={users}
-          gemmer={gemmer}
-          sortingCriterion={sortingCriterion}
-          categories={categories}
-          collection={collection}
-          onCollectionChange={handleCollectionChange}
+    <Fragment>
+      <Head>
+        <title>Hidden Gems — Collection</title>
+        <meta
+          name="description"
+          content="Collection of all the hidden gems you have saved along."
         />
-      )}
-      {emptyCollection && <CollectionEmpty />}
-    </section>
+      </Head>
+      <section>
+        <CollectionHeader onSortChange={handleSortingChange} />
+        {!emptyCollection && (
+          <Masonry
+            gems={collection}
+            users={users}
+            gemmer={gemmer}
+            sortingCriterion={sortingCriterion}
+            categories={categories}
+            collection={collection}
+            onCollectionChange={handleCollectionChange}
+          />
+        )}
+        {emptyCollection && <CollectionEmpty />}
+      </section>
+    </Fragment>
   );
 };
 

@@ -29,7 +29,7 @@ const Home = ({ isAuthenticated, gems, users, gemmer, collectionGems }) => {
   return (
     <Fragment>
       <Head>
-        <title>Hidden Gems</title>
+        <title>Hidden Gems — Home</title>
         <meta
           name="description"
           content="A social media platform where you discover hundreds of hidden gems from people all over the world."

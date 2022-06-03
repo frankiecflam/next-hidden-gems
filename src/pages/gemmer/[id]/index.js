@@ -1,5 +1,6 @@
 import styles from "./IndexPage.module.css";
-import { useState } from "react";
+import { useState, Fragment } from "react";
+import Head from "next/head";
 import GemmerHeader from "../../../components/Gemmer/GemmerHeader";
 import getAuthToken from "../../../utils/helpers/getAuthToken";
 import getUserIdByToken from "../../../utils/helpers/getUserIdByToken";
@@ -27,9 +28,21 @@ const GemmerDetails = ({
 
   if (!queryIdValid) {
     return (
-      <section className={styles.gemmer}>
-        <GemmerNotFound queryId={queryId} />
-      </section>
+      <Fragment>
+        <Head>
+          <title>Hidden Gems — Gemmer Profile</title>
+          <meta
+            name="description"
+            content="Gemmer's information and hidden gems."
+          />
+        </Head>
+        <section className={styles.newgem}>
+          <NewGemForm gemmer={gemmer} categories={categories} />
+        </section>
+        <section className={styles.gemmer}>
+          <GemmerNotFound queryId={queryId} />
+        </section>
+      </Fragment>
     );
   }
 
