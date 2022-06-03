@@ -5,7 +5,8 @@ import getAllGems from "../../utils/helpers/getAllGems";
 import getAllUsers from "../../utils/helpers/getAllUsers";
 import Masonry from "../../components/Masonry/Masonry";
 import filterGemsByCategory from "../../utils/helpers/filterGemsByCategory";
-import { useState } from "react";
+import { useState, Fragment } from "react";
+import Head from "next/head";
 import getAllCategories from "../../utils/helpers/getCategories";
 import getGemsBySearchTerm from "../../utils/helpers/getGemsBySearchTerm";
 import getCategoryNameById from "../../utils/helpers/getCategoryNameById";
@@ -46,23 +47,32 @@ const Explore = ({ gems, users, categories, gemmer, collectionGems }) => {
   const filteredCategoryName = getCategoryNameById(categories, filterCategory);
 
   return (
-    <section className={styles.explore}>
-      <ExploreHeader
-        onCategoryChange={handleCategoryChange}
-        onSearchChange={handleSearchTermChange}
-        searchTerm={searchTerm}
-        categories={categories}
-      />
-      <Masonry
-        gems={searchedGems}
-        users={users}
-        category={filteredCategoryName}
-        searchTerm={searchTerm}
-        gemmer={gemmer}
-        collection={collection}
-        onCollectionChange={handleCollectionChange}
-      />
-    </section>
+    <Fragment>
+      <Head>
+        <title>Hidden Gems — Exploring</title>
+        <meta
+          name="description"
+          content="Start exploring hundreds of hidden gems from people all over the world."
+        />
+      </Head>
+      <section className={styles.explore}>
+        <ExploreHeader
+          onCategoryChange={handleCategoryChange}
+          onSearchChange={handleSearchTermChange}
+          searchTerm={searchTerm}
+          categories={categories}
+        />
+        <Masonry
+          gems={searchedGems}
+          users={users}
+          category={filteredCategoryName}
+          searchTerm={searchTerm}
+          gemmer={gemmer}
+          collection={collection}
+          onCollectionChange={handleCollectionChange}
+        />
+      </section>
+    </Fragment>
   );
 };
 
