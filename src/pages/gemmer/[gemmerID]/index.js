@@ -33,6 +33,8 @@ const GemmerDetails = ({
     );
   }
 
+  console.log(queryIdValid);
+
   const isSameUser = gemmerId === currentUserId;
 
   const handleCollectionChange = async (itemExisted, item) => {
