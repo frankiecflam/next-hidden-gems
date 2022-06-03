@@ -15,7 +15,6 @@ import updateCollection from "../../../utils/helpers/updateCollection";
 const GemmerDetails = ({
   queryIdValid,
   queryId,
-  params,
   currentUserId,
   gemmer,
   gemmerId,
@@ -36,9 +35,6 @@ const GemmerDetails = ({
             content="Gemmer's information and hidden gems."
           />
         </Head>
-        <section className={styles.newgem}>
-          <NewGemForm gemmer={gemmer} categories={categories} />
-        </section>
         <section className={styles.gemmer}>
           <GemmerNotFound queryId={queryId} />
         </section>
