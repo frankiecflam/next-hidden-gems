@@ -25,6 +25,9 @@ const GemmerDetails = ({
   const { gemmerId } = useRouter().query;
   const [collection, setCollection] = useState(collectionGems);
 
+  console.log(gemmer);
+  console.log(queryIdValid, "queryIDValid");
+
   if (!queryIdValid) {
     return (
       <section className={styles.gemmer}>
@@ -32,8 +35,6 @@ const GemmerDetails = ({
       </section>
     );
   }
-
-  console.log(queryIdValid);
 
   const isSameUser = gemmerId === currentUserId;
 
