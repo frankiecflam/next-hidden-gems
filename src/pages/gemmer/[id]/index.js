@@ -25,9 +25,7 @@ const GemmerDetails = ({
 }) => {
   const [collection, setCollection] = useState(collectionGems);
 
-  console.log(params, "params");
-  console.log(gemmerId, "gemmerId");
-  console.log(queryId, "queryId");
+  console.log(params);
 
   if (!queryIdValid) {
     return (
@@ -85,7 +83,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const { gemmerId } = context.params;
+  const { id: gemmerId } = context.params;
   const gemmer = await getUserData(gemmerId);
 
   // if gemmer is not found with queryId, then gemmerId is incorrently provided in URL
