@@ -1,6 +1,6 @@
 import styles from "./GemmerEditForm.module.css";
 import useFileReader from "../../utils/hooks/useFileReader";
-
+import defaultProfileImage from "../../assets/images/defaultProfileImage.png";
 import SubmitBtn from "../Buttons/SubmitBtn";
 import { useState, forwardRef } from "react";
 import updateGemmerData from "../../utils/helpers/updateGemmerData";
@@ -27,7 +27,9 @@ NewGemmerProfilePicture.displayName = "NewGemmerProfilePicture";
 
 const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
   const { username, bio, gemmerDbKey, profileImage } = gemmer;
-  const { file, fileDataURL, handleFileChange } = useFileReader(profileImage);
+  const { file, fileDataURL, handleFileChange } = useFileReader(
+    profileImage || defaultProfileImage
+  );
   const [enteredUsername, setEnteredUsername] = useState(username);
   const [enteredBio, setEnteredBio] = useState(bio);
   const router = useRouter();
