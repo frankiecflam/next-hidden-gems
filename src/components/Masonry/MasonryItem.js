@@ -15,6 +15,7 @@ const MasonryItemImage = forwardRef(({ image }, ref) => {
         height={480}
         className={styles.image}
         alt="gem post's image"
+        layout="responsive"
       />
     </div>
   );
