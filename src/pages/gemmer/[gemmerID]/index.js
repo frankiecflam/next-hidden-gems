@@ -14,6 +14,7 @@ import updateCollection from "../../../utils/helpers/updateCollection";
 const GemmerDetails = ({
   queryIdValid,
   queryId,
+  context,
   currentUserId,
   gemmer,
   gemmerId,
@@ -23,6 +24,8 @@ const GemmerDetails = ({
   collectionGems,
 }) => {
   const [collection, setCollection] = useState(collectionGems);
+
+  console.log(context);
 
   if (!queryIdValid) {
     return (
@@ -88,6 +91,7 @@ export async function getServerSideProps(context) {
   if (!gemmer) {
     return {
       props: {
+        context,
         queryId: gemmerId,
         queryIdValid: false,
       },
