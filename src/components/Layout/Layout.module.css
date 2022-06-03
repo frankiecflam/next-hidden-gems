@@ -1,6 +1,5 @@
 .layout {
   position: relative;
-  width: 100%;
   display: grid;
   grid-template-columns:
     [padding-left-start] 2rem [padding-left-end content-start] repeat(12, 1fr)

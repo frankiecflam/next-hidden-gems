@@ -31,7 +31,7 @@ const Collection = ({ gemmer, gems, users, categories }) => {
   const emptyCollection = collection.length === 0;
 
   return (
-    <section className={styles.collection}>
+    <section>
       <CollectionHeader onSortChange={handleSortingChange} />
       {!emptyCollection && (
         <Masonry

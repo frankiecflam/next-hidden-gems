@@ -55,7 +55,7 @@ const Explore = ({ gems, users, categories, gemmer, collectionGems }) => {
           content="Start exploring hundreds of hidden gems from people all over the world."
         />
       </Head>
-      <section className={styles.explore}>
+      <section>
         <ExploreHeader
           onCategoryChange={handleCategoryChange}
           onSearchChange={handleSearchTermChange}
