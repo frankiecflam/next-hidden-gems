@@ -6,7 +6,8 @@ import getAllGems from "../utils/helpers/getAllGems";
 import getAllUsers from "../utils/helpers/getAllUsers";
 import getUserIdByToken from "../utils/helpers/getUserIdByToken";
 import getUserData from "../utils/helpers/getUserData";
-import { useState } from "react";
+import { useState, Fragment } from "react";
+import Head from "next/head";
 import getGemsFromCollection from "../utils/helpers/getGemsFromCollection";
 import updateCollection from "../utils/helpers/updateCollection";
 
@@ -26,18 +27,27 @@ const Home = ({ isAuthenticated, gems, users, gemmer, collectionGems }) => {
   };
 
   return (
-    <section className={styles.home}>
-      {!isAuthenticated && <HomeHero />}
-      {isAuthenticated && (
-        <Masonry
-          gems={gems}
-          users={users}
-          gemmer={gemmer}
-          collection={collection}
-          onCollectionChange={handleCollectionChange}
+    <Fragment>
+      <Head>
+        <title>Hidden Gems</title>
+        <meta
+          name="description"
+          content="A social media platform where you discover hundreds of hidden gems from people all over the world."
         />
-      )}
-    </section>
+      </Head>
+      <section className={styles.home}>
+        {!isAuthenticated && <HomeHero />}
+        {isAuthenticated && (
+          <Masonry
+            gems={gems}
+            users={users}
+            gemmer={gemmer}
+            collection={collection}
+            onCollectionChange={handleCollectionChange}
+          />
+        )}
+      </section>
+    </Fragment>
   );
 };
 
