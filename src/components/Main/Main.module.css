@@ -1,4 +1,10 @@
 .main {
   grid-column: content-start / content-end;
-  padding-top: 12rem;
+  padding-top: 10rem;
+}
+
+@media only screen and (min-width: 48em) {
+  .main {
+    padding-top: 12rem;
+  }
 }
