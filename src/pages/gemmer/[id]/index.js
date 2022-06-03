@@ -25,8 +25,6 @@ const GemmerDetails = ({
 }) => {
   const [collection, setCollection] = useState(collectionGems);
 
-  console.log(params);
-
   if (!queryIdValid) {
     return (
       <section className={styles.gemmer}>
@@ -92,7 +90,6 @@ export async function getServerSideProps(context) {
     return {
       props: {
         currentUserId,
-        params: context.params,
         queryId: gemmerId,
         queryIdValid: false,
       },

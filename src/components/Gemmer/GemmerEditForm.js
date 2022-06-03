@@ -50,7 +50,7 @@ const GemmerEditForm = ({ gemmer, onCloseEdit }) => {
     await updateGemmerData(data, gemmerDbKey);
 
     // To force a reload of the current page with newly-fetched data from DB
-    const { gemmerId } = router.query;
+    const { id: gemmerId } = router.query;
     router.push(`/gemmer/${gemmerId}`);
     onCloseEdit();
   };
