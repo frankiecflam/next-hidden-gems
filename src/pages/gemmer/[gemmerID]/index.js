@@ -1,5 +1,4 @@
 import styles from "./IndexPage.module.css";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import GemmerHeader from "../../../components/Gemmer/GemmerHeader";
 import getAuthToken from "../../../utils/helpers/getAuthToken";
@@ -17,16 +16,13 @@ const GemmerDetails = ({
   queryId,
   currentUserId,
   gemmer,
+  gemmerId,
   gems,
   users,
   currentUser,
   collectionGems,
 }) => {
-  const { gemmerId } = useRouter().query;
   const [collection, setCollection] = useState(collectionGems);
-
-  console.log(gemmer);
-  console.log(queryIdValid, "queryIDValid");
 
   if (!queryIdValid) {
     return (
@@ -107,6 +103,7 @@ export async function getServerSideProps(context) {
     props: {
       queryIdValid: true,
       currentUserId,
+      gemmerId,
       gemmer,
       gems,
       users,
