@@ -57,20 +57,29 @@ const GemmerDetails = ({
   };
 
   return (
-    <section className={styles.gemmer}>
-      <GemmerHeader
-        gemmer={gemmer}
-        isSameUser={isSameUser}
-        currentUser={currentUser}
-      />
-      <Masonry
-        gems={gems}
-        users={users}
-        gemmer={gemmer}
-        collection={collection}
-        onCollectionChange={handleCollectionChange}
-      />
-    </section>
+    <Fragment>
+      <Head>
+        <title>Hidden Gems — Gemmer Profile</title>
+        <meta
+          name="description"
+          content="Gemmer's information and hidden gems."
+        />
+      </Head>
+      <section className={styles.gemmer}>
+        <GemmerHeader
+          gemmer={gemmer}
+          isSameUser={isSameUser}
+          currentUser={currentUser}
+        />
+        <Masonry
+          gems={gems}
+          users={users}
+          gemmer={gemmer}
+          collection={collection}
+          onCollectionChange={handleCollectionChange}
+        />
+      </section>
+    </Fragment>
   );
 };
 
