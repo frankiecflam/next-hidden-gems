@@ -79,7 +79,7 @@ All pages share the same navigation. NAVIGATION enables users switching between 
 
 ### Links
 
-- Live Site URL: [https://zestyburgers.netlify.app/](https://zestyburgers.netlify.app/)
+- Live Site URL: [https://next-hidden-gems.vercel.app/](https://next-hidden-gems.vercel.app/)
 
 ## My process
 
