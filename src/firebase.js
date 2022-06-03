@@ -9,7 +9,8 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "react-hidden-gems.firebaseapp.com",
-  databaseURL: process.env.DATABASE_URL,
+  databaseURL:
+    "https://react-hidden-gems-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "react-hidden-gems",
   storageBucket: "react-hidden-gems.appspot.com",
   messagingSenderId: "97250549476",
