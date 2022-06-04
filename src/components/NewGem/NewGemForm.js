@@ -126,7 +126,11 @@ const NewGemForm = ({ gemmer, categories }) => {
           <input
             type="file"
             accept="image/*"
-            className={styles.fileInput}
+            className={
+              fileDataURL
+                ? `${styles.fileInput} ${styles.active}`
+                : styles.fileInput
+            }
             onChange={handleFileChange}
             required
           />

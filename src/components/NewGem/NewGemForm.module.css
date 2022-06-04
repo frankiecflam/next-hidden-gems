@@ -86,6 +86,10 @@
   padding: 1rem 0;
 }
 
+.active.fileInput::after {
+  display: none;
+}
+
 .titleInput,
 .descriptionInput,
 .categoryInput {
