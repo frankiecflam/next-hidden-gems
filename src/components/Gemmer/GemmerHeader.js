@@ -4,7 +4,7 @@ import GemmerInfo from "./GemmerInfo";
 import GemmerEditForm from "./GemmerEditForm";
 import { useState } from "react";
 
-const GemmerHeader = ({ gemmer, isSameUser, currentUser }) => {
+const GemmerHeader = ({ gemmer, gemmers, isSameUser, currentUser }) => {
   const [showEditForm, setShowEditForm] = useState(false);
 
   const handleEditClick = () => {
@@ -16,6 +16,7 @@ const GemmerHeader = ({ gemmer, isSameUser, currentUser }) => {
       {!showEditForm && (
         <GemmerInfo
           gemmer={gemmer}
+          gemmers={gemmers}
           isSameUser={isSameUser}
           onEditClick={handleEditClick}
           currentUser={currentUser}

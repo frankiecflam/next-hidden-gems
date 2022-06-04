@@ -2,12 +2,12 @@ import styles from "./GemmerInfo.module.css";
 import { Fragment, useState, forwardRef } from "react";
 import defaultImage from "../../assets/images/defaultProfileImage.png";
 import Image from "next/image";
-
 import FollowBtn from "../Buttons/FollowBtn";
 import EditBtn from "../Buttons/EditBtn";
 import checkFollowing from "../../utils/helpers/checkFollowing";
 import updateGemmerData from "../../utils/helpers/updateGemmerData";
 import popoutGemmerDbKey from "../../utils/helpers/popoutGemmerDbKey";
+import GemmerFollow from "./GemmerFollow";
 
 const GemmerProfileImage = forwardRef(({ image, hasProfileImage }, ref) => {
   return (
@@ -25,8 +25,22 @@ const GemmerProfileImage = forwardRef(({ image, hasProfileImage }, ref) => {
 
 GemmerProfileImage.displayName = "GemmerProfileImage";
 
-const GemmerInfo = ({ gemmer, isSameUser, onEditClick, currentUser }) => {
-  const { profileImage, username, gems, followers, bio, id: gemmerId } = gemmer;
+const GemmerInfo = ({
+  gemmer,
+  gemmers,
+  isSameUser,
+  onEditClick,
+  currentUser,
+}) => {
+  const {
+    profileImage,
+    username,
+    gems,
+    followers,
+    bio,
+    id: gemmerId,
+    following,
+  } = gemmer;
   const [followersNum, setFollowersNum] = useState(
     JSON.parse(followers).length
   );
@@ -34,12 +48,16 @@ const GemmerInfo = ({ gemmer, isSameUser, onEditClick, currentUser }) => {
     checkFollowing(gemmerId, currentUser.following)
   );
 
-  const gemsNum = JSON.parse(gems).length;
-
   const [currentUserFollowing, setCurrentUserFollowing] = useState(
     JSON.parse(currentUser.following)
   );
   const [gemmerFollowers, setGemmerFollowers] = useState(JSON.parse(followers));
+
+  const [showFollowerModal, setShowFollowerModal] = useState(false);
+  const [showFollowingModal, setShowFollowingModal] = useState(false);
+
+  const gemsNum = JSON.parse(gems).length;
+  const followingNum = JSON.parse(following).length;
 
   const handleFollowerUpdate = async () => {
     let updatedGemmerData = popoutGemmerDbKey(gemmer);
@@ -86,6 +104,14 @@ const GemmerInfo = ({ gemmer, isSameUser, onEditClick, currentUser }) => {
     await updateGemmerData(updatedCurrentUserData, currentUser.gemmerDbKey);
   };
 
+  const handleFollowerClick = () => {
+    setShowFollowerModal((prevState) => !prevState);
+  };
+
+  const handleFollowingClick = () => {
+    setShowFollowingModal((prevState) => !prevState);
+  };
+
   return (
     <Fragment>
       <GemmerProfileImage
@@ -104,13 +130,37 @@ const GemmerInfo = ({ gemmer, isSameUser, onEditClick, currentUser }) => {
           {isSameUser && <EditBtn onClick={onEditClick} />}
         </div>
         <div className={styles.flex}>
-          <p>
-            <span className={styles.gemsNum}>{gemsNum}</span> gems
-          </p>
-          <p>
-            <span className={styles.followersNum}>{followersNum}</span>{" "}
-            followers
-          </p>
+          <div>
+            <p>
+              <span className={styles.gemsNum}>{gemsNum}</span> gems
+            </p>
+          </div>
+          <div className={styles.followers}>
+            <p onClick={handleFollowerClick}>
+              <span className={styles.followersNum}>{followersNum}</span>{" "}
+              followers
+            </p>
+            {showFollowerModal && (
+              <GemmerFollow
+                onClick={handleFollowerClick}
+                followers={gemmerFollowers}
+                gemmers={gemmers}
+              />
+            )}
+          </div>
+          <div className={styles.following}>
+            <p onClick={handleFollowingClick}>
+              <span className={styles.followingNum}>{followingNum}</span>{" "}
+              following
+            </p>
+            {showFollowingModal && (
+              <GemmerFollow
+                onClick={handleFollowingClick}
+                following={following}
+                gemmers={gemmers}
+              />
+            )}
+          </div>
         </div>
         <p className={styles.bio}>{bio}</p>
       </div>

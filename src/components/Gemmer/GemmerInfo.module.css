@@ -24,7 +24,8 @@
 }
 
 .gemsNum,
-.followersNum {
+.followersNum,
+.followingNum {
   font-weight: 600;
 }
 
@@ -38,4 +39,9 @@
 
 .imageContainer {
   margin: 0 auto;
+}
+
+.followers,
+.following {
+  cursor: pointer;
 }

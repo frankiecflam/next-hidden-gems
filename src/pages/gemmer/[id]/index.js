@@ -68,6 +68,7 @@ const GemmerDetails = ({
       <section className={styles.gemmer}>
         <GemmerHeader
           gemmer={gemmer}
+          gemmers={users}
           isSameUser={isSameUser}
           currentUser={currentUser}
         />

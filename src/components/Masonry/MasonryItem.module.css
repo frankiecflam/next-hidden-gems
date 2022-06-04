@@ -45,3 +45,11 @@
 .active .collectionIcon {
   opacity: 1;
 }
+
+/* For mobile-device */
+@media (hover: none) {
+  .collectionIcon {
+    font-size: 1.5rem;
+    opacity: 1;
+  }
+}
