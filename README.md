@@ -11,6 +11,7 @@ This is my first NextJS app, a multiple-page application working as a social med
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
+  - [Why I coded this project](#what-i-coded-this-project)
   - [What I learned](#what-i-learned)
 - [Author](#author)
 
@@ -90,24 +91,120 @@ All pages share the same navigation. NAVIGATION enables users switching between 
 - Firebase
 - Mobile responsiveness
 
+### Why I coded this project
+
+Despite the fact that I am currently striving to be a front-end web developer with primary focus on enhancing my front-end skills, I wanted to get a glimpse of how a full-stack app works in practice and how React works with NextJS as its backend.
+
 ### What I learned
-
-#### React
-
-```js
-
-```
 
 #### Next JS
 
-```js
+##### Server-side Rendering
 
+getServerSideProps in NextJS enables pre-rendering a page with all the necessary props before component mounting. In this project, because content of some pages needs to be protected from guest users, server-side authentication has to be performed to see if users should be redirected to homepage for signing up or in an account first before viewing protected content. Apart from user authentication, since getServerSideProps fetches all necessary data from Firebase's database in preparation for components being mounted later.
+
+```js
+export async function getServerSideProps(context) {
+  const authToken = getAuthToken(context);
+
+  const currentUserId = await getUserIdByToken(authToken);
+  if (!currentUserId) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  const gems = await getAllGems();
+  const users = await getAllUsers();
+  const categories = await getAllCategories();
+  const gemmer = await getUserData(currentUserId);
+  const collectionGems = await getGemsFromCollection(currentUserId);
+
+  return {
+    props: {
+      gems,
+      gemmer,
+      users,
+      categories,
+      collectionGems,
+      currentUserId,
+    },
+  };
+}
+```
+
+##### API Routes
+
+With the use of API routes, I masked the URL of the Firebase's authentication, and therefore account authentication only runs on server side and data provided by users will never get exposed to the frontend.
+
+```js
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const data = req.body;
+
+    const response = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.FIREBASE_API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+          returnSecureToken: true,
+        }),
+      }
+    );
+    if (!response.ok) {
+      res.status(400).json({ response });
+    }
+    const { idToken } = await response.json();
+
+    // setCookie
+    res.setHeader(
+      "Set-Cookie",
+      cookie.serialize("authToken", idToken, {
+        httpOnly: true,
+        maxAge: 60 * 60,
+        sameSite: "strict",
+        path: "/",
+      })
+    );
+    res.status(200).json({ response });
+  }
+}
 ```
 
 #### Firebase
 
-```js
+##### Image Hosting
 
+```js
+async function uploadImageToFirebase(image, path) {
+  const imageRef = ref(storage, `images/${path}/${image.name}`);
+
+  await uploadBytes(imageRef, image);
+  const url = await getDownloadURL(imageRef);
+
+  return url;
+}
+```
+
+##### Database Updating
+
+```js
+async function updateGemmerData(newData, gemmerDbKey) {
+  const userRef = ref(db, `user/${gemmerDbKey}`);
+
+  // Update DB
+  await update(userRef, newData);
+
+  return true;
+}
 ```
 
 ## Author
