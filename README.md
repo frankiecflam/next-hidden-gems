@@ -11,7 +11,7 @@ This is my first NextJS app, a multiple-page application working as a social med
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [Why I coded this project](#what-i-coded-this-project)
+  - [Why I coded this project](#why-i-coded-this-project)
   - [What I learned](#what-i-learned)
 - [Author](#author)
 
