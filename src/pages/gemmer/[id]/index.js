@@ -1,6 +1,8 @@
 import styles from "./IndexPage.module.css";
 import { useState, Fragment } from "react";
 import Head from "next/head";
+import Link from "next/link";
+import { AddIcon } from "../../../assets/icons";
 import GemmerHeader from "../../../components/Gemmer/GemmerHeader";
 import getAuthToken from "../../../utils/helpers/getAuthToken";
 import getUserIdByToken from "../../../utils/helpers/getUserIdByToken";
@@ -43,6 +45,7 @@ const GemmerDetails = ({
   }
 
   const isSameUser = gemmerId === currentUserId;
+  const emptyMasonry = gems.length === 0;
 
   const handleCollectionChange = async (itemExisted, item) => {
     await updateCollection(gemmer, collection, itemExisted, item);
@@ -72,13 +75,25 @@ const GemmerDetails = ({
           isSameUser={isSameUser}
           currentUser={currentUser}
         />
-        <Masonry
-          gems={gems}
-          users={users}
-          gemmer={gemmer}
-          collection={collection}
-          onCollectionChange={handleCollectionChange}
-        />
+        {!emptyMasonry && (
+          <Masonry
+            gems={gems}
+            users={users}
+            gemmer={gemmer}
+            collection={collection}
+            onCollectionChange={handleCollectionChange}
+          />
+        )}
+        {emptyMasonry && (
+          <div className={styles.emptyMasonry}>
+            <Link href="/newgem">
+              <a>
+                <AddIcon className={styles.addIcon} />
+              </a>
+            </Link>
+            <p className={styles.noPosts}>No posts yet!</p>
+          </div>
+        )}
       </section>
     </Fragment>
   );

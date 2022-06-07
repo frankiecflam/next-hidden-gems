@@ -49,7 +49,7 @@ const Explore = ({ gems, users, categories, gemmer, collectionGems }) => {
   return (
     <Fragment>
       <Head>
-        <title>Hidden Gems — Exploring</title>
+        <title>Hidden Gems — Explore</title>
         <meta
           name="description"
           content="Start exploring hundreds of hidden gems from people all over the world."

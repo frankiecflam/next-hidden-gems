@@ -1,3 +1,25 @@
 .gemmer {
   width: 100%;
 }
+
+.emptyMasonry {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 0;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.5rem;
+}
+
+.addIcon {
+  font-size: 3.1rem;
+  cursor: pointer;
+  fill: #646464;
+}
+
+.noPosts {
+  font-size: 3.1rem;
+  color: #a2a2a2;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
