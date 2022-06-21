@@ -48,7 +48,8 @@ const GemmerDetails = ({
   const emptyMasonry = gems.length === 0;
 
   const handleCollectionChange = async (itemExisted, item) => {
-    await updateCollection(gemmer, collection, itemExisted, item);
+    // Update current user data
+    await updateCollection(currentUser, collection, itemExisted, item);
 
     if (itemExisted) {
       setCollection((prevState) =>
