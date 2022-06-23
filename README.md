@@ -80,7 +80,7 @@ All pages share the same navigation. NAVIGATION enables users switching between 
 
 ### Links
 
-- Live Site URL: [https://next-hidden-gems.vercel.app/](https://next-hidden-gems.vercel.app/)
+- Live Site URL: [https://hiddengems.vercel.app/](https://hiddengems.vercel.app/)
 
 ## My process
 
@@ -209,6 +209,6 @@ async function updateGemmerData(newData, gemmerDbKey) {
 
 ## Author
 
-- Email - [Frankie Lam] frankiechunfai@gmail.com
+- Email - [Frankie Lam] cfl.frankie@gmail.com
 - Instagram - [@frankie\_\_\_lam](https://www.instagram.com/frankie___lam/)
 - Facebook - [Frankie Lam](https://www.facebook.com/frankiecflam/)
