@@ -11,6 +11,7 @@ const AccountFormInput = ({
   validated,
   validity,
   invalidFeedback,
+  autoComplete,
 }) => {
   let classes = styles.accountInput;
 
@@ -28,6 +29,7 @@ const AccountFormInput = ({
         placeholder={placeholder}
         onChange={onChange}
         required={required}
+        autoComplete={autoComplete}
       />
       <CorrectIcon className={styles.correctIcon} />
       <IncorrectIcon className={styles.incorrectIcon} />

@@ -1,6 +1,14 @@
 import styles from "./Input.module.css";
 
-const Input = ({ className, type, placeholder, onChange, value, required }) => {
+const Input = ({
+  className,
+  type,
+  placeholder,
+  onChange,
+  value,
+  required,
+  autoComplete,
+}) => {
   const classes = className ? `${styles.input} ${className}` : styles.input;
 
   return (
@@ -11,6 +19,7 @@ const Input = ({ className, type, placeholder, onChange, value, required }) => {
       onChange={onChange}
       value={value}
       required={required}
+      autoComplete={autoComplete}
     />
   );
 };

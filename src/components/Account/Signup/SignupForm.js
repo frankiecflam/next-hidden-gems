@@ -192,6 +192,7 @@ const SignupForm = ({ onSuccessfulSignup, onUnsuccessfulSignup }) => {
         validated={inputState.passwordValidated}
         validity={inputState.passwordValidity}
         invalidFeedback="password must be at least 6-digit long."
+        autoComplete="on"
       />
       <AccountFormInput
         type="password"
@@ -202,6 +203,7 @@ const SignupForm = ({ onSuccessfulSignup, onUnsuccessfulSignup }) => {
         validated={inputState.confirmPasswordValidated}
         validity={inputState.confirmPasswordValidity}
         invalidFeedback="password doesn't match."
+        autoComplete="on"
       />
       <AccountFormSubmitBtn text="sign up" className={styles.signupBtn} />
     </AccountForm>

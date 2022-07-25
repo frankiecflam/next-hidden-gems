@@ -69,6 +69,7 @@ const LoginForm = ({ onUnsuccessfulLogin, onSuccessfulLogin }) => {
         value={password}
         required={true}
         onChange={handlePasswordChange}
+        autoComplete="on"
       />
       <AccountFormSubmitBtn text="log in" className={styles.loginBtn} />
     </AccountForm>
