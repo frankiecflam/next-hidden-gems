@@ -6,13 +6,17 @@ import getAllGems from "../utils/helpers/getAllGems";
 import getAllUsers from "../utils/helpers/getAllUsers";
 import getUserIdByToken from "../utils/helpers/getUserIdByToken";
 import getUserData from "../utils/helpers/getUserData";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import Head from "next/head";
 import getGemsFromCollection from "../utils/helpers/getGemsFromCollection";
 import updateCollection from "../utils/helpers/updateCollection";
 
 const Home = ({ isAuthenticated, gems, users, gemmer, collectionGems }) => {
-  const [collection, setCollection] = useState(collectionGems);
+  const [collection, setCollection] = useState([]);
+
+  useEffect(() => {
+    setCollection(collectionGems);
+  }, [collectionGems]);
 
   const handleCollectionChange = async (itemExisted, item) => {
     await updateCollection(gemmer, collection, itemExisted, item);
